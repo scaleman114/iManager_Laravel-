@@ -175,6 +175,18 @@ class EnquiryController extends Controller
         //dd($datePeriod);
         $enquiries = Enquiry::Diary($datePeriod)->get();
         //dd($enquiries);
+        
+
+        $empty=True;
+        foreach ($enquiries as $el){ 
+        if ($el){
+        $empty=False;
+        break;
+            }
+        }
+        if($empty)
+        return redirect('/enquiries')->with('ERROR', 'No Alerts');
+        else
         return view('enquiries.diary', compact('enquiries', 'datePeriod'));
     }
 

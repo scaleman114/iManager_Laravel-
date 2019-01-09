@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
     <div class="card-header">
-        Add contact
+        Add contact to {{ $customer->cust_name }}
     </div>
     <div class="card-body">
         @if ($errors->any())
@@ -54,7 +54,7 @@
 
             <div class="form-group">
                 <label for="customer_id">Customer Id :</label>
-                <input type="text" class="form-control" name="customer_id" value={{$customer_id}}>
+                <input type="text" class="form-control" name="customer_id" value={{ $customer->id }}>
             </div>
 
 

@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
     <div class="card-header">
-        Edit Enquiry
+        Edit Contact for {{ $customer->cust_name }}
     </div>
     <div class="card-body">
         @if ($errors->any())

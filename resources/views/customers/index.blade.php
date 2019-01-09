@@ -54,7 +54,7 @@
                 <td>{{$customer->cust_name}}</td>
                 <td>{{$customer->address}}</td>
                 <td>{{$customer->main_phone}}</td>
-                <td>{{$customer->main_email}}</td>
+                <td><a href="mailto:{{$customer->main_email}}">{{$customer->main_email}}</a></td>
 
 
                 <td><a href="{{ route('customers.edit',$customer->id)}}" class="btn btn-primary">Edit</a></td>

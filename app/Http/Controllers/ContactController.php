@@ -27,7 +27,8 @@ class ContactController extends Controller
     public function create($customer_id)
     {
         //dd($customer_id);
-        return view('contacts.create',compact('customer_id'));
+        $customer = Customer::find($customer_id);
+        return view('contacts.create',compact('customer'));
         
     }
 
@@ -82,8 +83,9 @@ class ContactController extends Controller
     public function edit($id)
     {
         $contact = Contact::find($id);
+        $customer = $contact->customer;
 
-        return view('contacts.edit', compact('contact'));
+        return view('contacts.edit', compact('contact','customer'));
     }
 
     /**

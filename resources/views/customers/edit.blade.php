@@ -91,7 +91,9 @@
                 <td>{{$contact->phone}}</td>
                 <td>{{$contact->ext}}</td>
                 <td>{{$contact->mobile}}</td>
-                <td>{{$contact->email}}</td>
+                <td>
+                    <a href="mailto:{{$contact->email}}">{{$contact->email}}</a>
+                </td>
 
 
                 <td><a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Edit</a></td>

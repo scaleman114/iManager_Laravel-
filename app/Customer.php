@@ -19,5 +19,10 @@ class Customer extends Model
           return $query->where('cust_name', 'like', '%' .$searchTerm. '%')
                        ->orWhere('address', 'like', '%' .$searchTerm. '%');
                        
-      } 
+      }
+      
+    public function contacts()
+    {
+        return $this->hasMany('App\Contact');
+    }
 }

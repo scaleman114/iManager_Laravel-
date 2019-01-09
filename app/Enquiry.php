@@ -36,12 +36,16 @@ class Enquiry extends Model
        {
         case "week";
         return $query 
-        ->whereBetween('enq_diarydate', [Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->orderby('enq_diarydate');
+        ->whereBetween('enq_diarydate', [Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])
+        ->where('enq_completed',false)
+        ->orderby('enq_diarydate');
         break;
         
         case "month":
         return $query 
-        ->whereBetween('enq_diarydate', [Carbon::now()->startOfMonth(),Carbon::now()->endOfMonth()])->orderby('enq_diarydate');
+        ->whereBetween('enq_diarydate', [Carbon::now()->startOfMonth(),Carbon::now()->endOfMonth()])
+        ->where('enq_completed',false)
+        ->orderby('enq_diarydate');
         break;
        } 
        /*if ($dateRange == "week")

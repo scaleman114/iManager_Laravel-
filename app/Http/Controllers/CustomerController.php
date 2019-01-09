@@ -18,10 +18,10 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
-
+        $searchTerm = $request->input('searchTerm');
+        $customers = Customer::search($searchTerm)->get();
         return view('customers.index', compact('customers'));
     }
 
@@ -77,9 +77,10 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
+        
         $customer = Customer::find($id);
-
-        return view('customers.edit', compact('customer'));
+        $contacts = $customer->contacts;    
+        return view('customers.edit', compact('customer','contacts'));
     }
 
     /**
@@ -122,4 +123,6 @@ class CustomerController extends Controller
 
         return redirect('/customers')->with('success', 'Customer has been deleted');
     }
+
+    
 }

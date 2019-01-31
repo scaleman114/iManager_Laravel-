@@ -36,7 +36,10 @@ class EnquiryController extends Controller
         $isCleared = $request->input('isCleared');
         if($isCleared == null)
         $isCleared = 0;
-        $enquiries = Enquiry::isCleared($isCleared)->search($searchTerm)->get();
+        $enquiries = Enquiry::isCleared($isCleared)
+        ->search($searchTerm)
+        ->orderby('updated_at', 'desc')
+        ->get();
         
         
         //dd($isCleared);

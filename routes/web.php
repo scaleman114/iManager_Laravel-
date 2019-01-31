@@ -36,3 +36,7 @@ Route::get('customers/{customer_id}/contacts', 'ContactController@index');
 Route::resource('contacts', 'ContactController');
 //placing this after means it overrides the standard create routes
 Route::get('customers/{customer_id}/contacts/create', 'ContactController@create')->name('contacts.create');
+
+Route::resource('parts', 'PartController');
+
+Route::resource('groups', 'GroupController');

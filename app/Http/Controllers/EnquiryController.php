@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Enquiry;
+use App\ZohoContact;
 use Auth;
 use DB;
 
@@ -60,8 +61,9 @@ class EnquiryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('enquiries.create');
+    {   
+        $zohocontacts = ZohoContact::all(['customer_name']);
+        return view('enquiries.create',compact('zohocontacts'));
     }
 
     
@@ -74,13 +76,15 @@ class EnquiryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'enq_customer'=>'required',
+       $request->validate([
+            'enq_zcontact'=>'required',
             'enq_description'=> 'required'
         ]);
         //$current = Carbon::now(); 
+        //dd($request->get('enq_zcontact'));
         $enquiry = new Enquiry([
-            'enq_customer' => $request->get('enq_customer'),
+            'enq_customer' => $request->get('enq_zcontact'),
+            //'enq_customer' => $request->get('enq_customer'),
             'enq_description'=> $request->get('enq_description'),
             'enq_completed'=> false,
             'enq_diarydate'=> $request->input('enq_diarydate'),

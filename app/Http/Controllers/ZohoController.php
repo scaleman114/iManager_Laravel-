@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\ZohoContact;
 //require ‘vendor/autoload.php’;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
-
-//use GuzzleHttp\Psr7\Request;
 
 class ZohoController extends Controller
 {
@@ -17,11 +17,15 @@ class ZohoController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = ZohoContact::all();
-        //return $groups;
+
+        $searchTerm = $request->input('searchTerm');
+        $contacts = ZohoContact::search($searchTerm)->get();
         return view('zohocontacts.index', compact('contacts'));
+        /*$contacts = ZohoContact::all();
+    //return $groups;
+    return view('zohocontacts.index', compact('contacts'));*/
     }
 
     public function fetchContacts($i, $access_token)
@@ -47,7 +51,7 @@ class ZohoController extends Controller
 
             $result = json_decode($res->getBody()->getContents(), true);
 
-//dd($result);
+            //dd($result);
 
             foreach ($result['contacts'] as $value) {
                 $zcontact = new ZohoContact;
@@ -55,17 +59,21 @@ class ZohoController extends Controller
                 $zcontact->customer_name = $value['customer_name'];
                 $zcontact->customer_email = $value['email'];
                 $zcontact->customer_phone = $value['phone'];
+                $zcontact->first_name = $value['first_name'];
+                $zcontact->last_name = $value['last_name'];
                 $zcontact->save();
                 $count++;
 
             }
 
-        } catch (\Exception $e) {
+        } catch (ClientException $e) {
+            //unauthorised
+            if ($e->getCode() == 401) {
+                exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
+            }
 
-            //exit('ERROR getting tokens: '.$e->getMessage());
-            //if there is an error chances are you need to sign in again so let's go there
-
-            exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
+            echo Psr7\str($e->getRequest());
+            echo Psr7\str($e->getResponse());
         }
         //echo $count."<br>";
         return $count;
@@ -99,8 +107,9 @@ class ZohoController extends Controller
         //echo 'Number of contacts added = '.$totalloaded."<br>";
 
         $contacts = ZohoContact::all();
-        //return $groups;
-        return view('zohocontacts.index', compact('contacts', 'totalloaded'));
+        //dd($contacts);
+        header('Location: ' . '/contacts');
+        //return view('zohocontacts.index', compact('contacts', 'totalloaded'));
 
         /*foreach ($result['contacts'] as $value) {
         echo $value['customer_name']." ".$value['email']."<br>";
@@ -112,7 +121,7 @@ class ZohoController extends Controller
         //dd($result);
 
     }
-
+    //Don't think this function is used, uses zedit instead
     /**
      * Show the form for editing the specified resource.
      *
@@ -155,6 +164,7 @@ class ZohoController extends Controller
             'Content-type' => "application/x-www-form-urlencoded;charset=UTF-8",
 
         ]);
+
         try {
             $client = new Client();
 
@@ -162,30 +172,39 @@ class ZohoController extends Controller
             ]);
 
             $result = json_decode($res->getBody()->getContents(), true);
-            //get existing contact rom db
+            //get existing contact from db
             $contact = ZohoContact::where('contact_id', $id)->first();
             //get the 'contact' array from the json result
             $data = $result['contact'];
             //dd($data);
-            //update the existing contact
+            //update the existing contact in db
             $contact->customer_name = $data['contact_name'];
+            //email and phone come from listing when it is refreshed
             $contact->address = $data['billing_address']['address'];
             $contact->street2 = $data['billing_address']['street2'];
             $contact->city = $data['billing_address']['city'];
             $contact->state = $data['billing_address']['state'];
             $contact->zip = $data['billing_address']['zip'];
+            $contact->primary_contactId = $data['primary_contact_id'];
+            //$contact->first_name = $data['first_name'];
+            //$contact->last_name = $data['last_name'];
             //save the existing contact
             $contact->save();
 
             //show the edit view
             return view('zohocontacts.edit', compact('contact'));
-        } catch (Exception $e) {
+        } catch (ClientException $e) {
 
-            //exit('ERROR getting tokens: '.$e->getMessage());
-            //if there is an error chances are you need to sign in again so let's go there
-            return $e->getMessage();
+            //unauthorised signin again
+            if ($e->getCode() == 401) {
+                exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
+            } else {
+                exit('ERROR: ' . $e->getCode());
+            }
+            return;
 
-            //exit('ERROR getting tokens: '.$e->getMessage().header('Location: '.'/signin'));
+            //echo Psr7\str($e->getRequest());
+            //echo Psr7\str($e->getResponse());
         }
 
     }
@@ -207,7 +226,16 @@ class ZohoController extends Controller
         $contact = ZohoContact::find($id);
         //dd($contact);
         $contact->customer_name = $request->get('customer_name');
-
+        $contact->customer_email = $request->get('email');
+        $contact->customer_phone = $request->get('phone');
+        $contact->address = $request->get('address');
+        $contact->street2 = $request->get('street2');
+        $contact->city = $request->get('city');
+        $contact->zip = $request->get('zip');
+        $contact->state = $request->get('state');
+        $contact->first_name = $request->get('first');
+        $contact->last_name = $request->get('last');
+        //dd($contact);
         $contact->save();
         //send to zoho
         self::zupdate($contact);
@@ -238,26 +266,72 @@ class ZohoController extends Controller
 
         ]);
 
-        //Add the body
-        $data = json_encode(['contact_name' => $zcontact->customer_name,
+        //Add the contact body
+        $billingAddress = ([
+            'address' => $zcontact->address,
+            'street2' => $zcontact->street2,
+            'city' => $zcontact->city,
+            'state' => $zcontact->state,
+            'zip' => $zcontact->zip,
+        ]);
+        //dd($billingAddress);
+        //Add the contact person body - needs to be separate as we only alter primary contact person
+        //and that's the first_name, last_name, email and phone that is included in the contact
+        $contactPerson = json_encode(['email' => $zcontact->customer_email,
+            'phone' => $zcontact->customer_phone,
+            'first_name' => $zcontact->first_name,
+            'last_name' => $zcontact->last_name,
+
         ]);
 
+        //dd($contactPerson);
+        $data = json_encode([
+            'contact_name' => $zcontact->customer_name,
+            'billing_address' => $billingAddress,
+
+        ]);
+
+        /*   $data2 = json_encode([
+
+        'contact_persons' => $contactPerson,
+        ]);*/
+
+        //Jsonify contact body
         $body = ([
             'JSONString' => $data,
         ]);
+        //dd($body);
+        //Jsonify contact person body
+        $body2 = ([
+            'JSONString' => $contactPerson,
+        ]);
+        //dd($body2);
+        //dd($zcontact->primary_contactId);
         try {
             $client = new Client();
-
+            //Send to contacts
             $res = $client->put("https://books.zoho.com/api/v3/contacts/" . $zcontact->contact_id,
                 ['query' => $query, "headers" => $headers, 'form_params' => $body]);
+            //Send to contact persons
+            $res = $client->put("https://books.zoho.com/api/v3/contacts/contactpersons/" . $zcontact->primary_contactId,
+                ['query' => $query, "headers" => $headers, 'form_params' => $body2]);
 
-        } catch (Exception $e) {
+            //dd($res);
+        } catch (ClientException $e) {
+            //unauthorised
+            if ($e->getCode() == 401) {
+                exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
+            } else {
+                exit('ERROR: ' . $e->getCode());
+            }
+            return;
+            //exit($e->getCode());
+            //return $e->getCode();
+            //dd($e->getCode());
+            //echo $e->getCode();
 
-            //exit('ERROR getting tokens: '.$e->getMessage());
-            //if there is an error chances are you need to sign in again so let's go there
-            return $e->getMessage();
-
-            //exit('ERROR getting tokens: '.$e->getMessage().header('Location: '.'/signin'));
+            //echo Psr7\str($e->getRequest());
+            //echo Psr7\str($e->getResponse());
         }
 
     }

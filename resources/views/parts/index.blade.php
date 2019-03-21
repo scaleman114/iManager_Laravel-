@@ -2,10 +2,33 @@
 
 @section('content')
 <style>
-    .uper {
+.uper {
     margin-top: 40px;
-  }
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.links>a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 </style>
+
+
+<div class="top-right links">
+
+    <a href="{{ url('/') }}">Home</a>
+
+</div>
 
 
 
@@ -19,7 +42,8 @@
         <form method="GET">
             {{csrf_field()}}
             <div class="input-group">
-                <input type="text" class="form-control" name="searchTerm" placeholder="Search for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
+                <input type="text" class="form-control" name="searchTerm" placeholder="Search for..."
+                    value="{{ isset($searchTerm) ? $searchTerm : '' }}">
                 <span class="input-group-btn">
                     <button class="btn btn-secondary" type="submit">Search</button>
                 </span>
@@ -69,7 +93,8 @@
                     <form action="{{ route('parts.destroy', $part->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')"
+                            type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -80,9 +105,9 @@
 </div>
 
 <script>
-    $(".delete").on("submit", function() {
-        return confirm("Are you sure?");
-    });
+$(".delete").on("submit", function() {
+    return confirm("Are you sure?");
+});
 </script>
 
 

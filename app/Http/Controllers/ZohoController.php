@@ -277,7 +277,8 @@ class ZohoController extends Controller
         //dd($billingAddress);
         //Add the contact person body - needs to be separate as we only alter primary contact person
         //and that's the first_name, last_name, email and phone that is included in the contact
-        $contactPerson = json_encode(['email' => $zcontact->customer_email,
+        $contactPerson = json_encode([
+            'email' => $zcontact->customer_email,
             'phone' => $zcontact->customer_phone,
             'first_name' => $zcontact->first_name,
             'last_name' => $zcontact->last_name,

@@ -89,7 +89,7 @@
 
             <div class="links">
                 <a href="{{ url('/enquiries') }}">Enquiries</a>
-                <a href="{{ url('/customers') }}">Customers</a>
+                <a href="{{ url('/parts') }}">Parts</a>
                 <a href="{{ url('/contacts') }}">Contacts</a>
                 <a href="https://laravel-news.com">News</a>
                 <a href="https://nova.laravel.com">Nova</a>

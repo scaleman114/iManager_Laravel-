@@ -2,10 +2,35 @@
 
 @section('content')
 <style>
-    .uper {
+.uper {
     margin-top: 40px;
-  }
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.links>a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 </style>
+
+
+<div class="top-right links">
+
+    <a href="{{ url('/') }}">Home</a>
+
+</div>
+
+
 
 <div class="row">
     <div>
@@ -17,7 +42,8 @@
         <form method="GET">
             {{csrf_field()}}
             <div class="input-group">
-                <input type="text" class="form-control" name="searchTerm" placeholder="Search for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
+                <input type="text" class="form-control" name="searchTerm" placeholder="Search for..."
+                    value="{{ isset($searchTerm) ? $searchTerm : '' }}">
                 <span class="input-group-btn">
                     <button class="btn btn-secondary" type="submit">Search</button>
                 </span>
@@ -40,7 +66,7 @@
             <tr>
                 <td>ID</td>
                 <td>Customer</td>
-                <td>Contact Details</td>
+                <td>Contact Email</td>
                 <td>Enquiry Description</td>
                 <td>Completed</td>
                 <td>Updated</td>
@@ -53,7 +79,7 @@
             <tr>
                 <td>{{$enquiry->id}}</td>
                 <td>{{$enquiry->enq_customer}}</td>
-                <td>{{$enquiry->enq_contact}}</td>
+                <td>{{$enquiry->enq_email}}</td>
                 <td>{{$enquiry->enq_description}}</td>
                 <td>{{$enquiry->enq_completed}}</td>
                 <td>{{ date('d/m/y', strtotime($enquiry->updated_at)) }}</td>

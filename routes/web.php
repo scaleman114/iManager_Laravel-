@@ -23,10 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('customers', 'CustomerController');
-
-Route::get('customers/{customer_id}/contacts', 'ContactController@index');
-
 //Route::get('customers/{customer_id}/contacts/create', 'ContactController@create')->name('contacts.create');
 //Route::get('contacts/{id}/edit', 'ContactController@edit')->name('contacts.edit');
 //Route::delete('contacts', 'ContactController@destroy')->name('contacts.destroy');
@@ -34,7 +30,6 @@ Route::get('customers/{customer_id}/contacts', 'ContactController@index');
 //Route::post('customers/{customer_id}/contacts', 'ContactController@store')->name('contacts.store');
 //Route::resource('contacts', 'ContactController');
 //placing this after means it overrides the standard create routes
-Route::get('customers/{customer_id}/contacts/create', 'ContactController@create')->name('contacts.create');
 
 Route::resource('parts', 'PartController');
 

@@ -23,12 +23,7 @@
         <form method="post" action="{{ route('enquiries.store') }}">
             <div class="form-group">
                 @csrf
-                <label for="name">Customer :</label>
-                <input type="text" class="form-control" name="enq_customer" />
-            </div>
-
-            <div class="form-group">
-                <label for="zcontact">ZContact :</label>
+                <label for="zcontact">Contact :</label>
                 <select class="form-control" name="enq_zcontact">
                     @foreach($zohocontacts as $zcontact)
                     <option value="{{$zcontact->customer_name}}">{{$zcontact->customer_name}}</option>
@@ -36,10 +31,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="contact">Contact Details :</label>
-                <textarea class="form-control" name="enq_contact" placeholder="Contact details"></textarea>
-            </div>
+
 
             <div class="form-group">
                 <label for="description">Description :</label>

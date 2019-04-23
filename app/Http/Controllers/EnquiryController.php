@@ -7,6 +7,7 @@ use App\ZohoContact;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class EnquiryController extends Controller
 {
@@ -31,7 +32,7 @@ class EnquiryController extends Controller
 
     public function index(Request $request)
     {
-        $homeurl = Storage::url('home.png');
+        //$homeurl = Storage::url('home.png');
         //dd($url);
         $searchTerm = $request->input('searchTerm');
         $isCleared = $request->input('isCleared');
@@ -44,7 +45,7 @@ class EnquiryController extends Controller
             ->orderby('updated_at', 'desc')
             ->get();
 
-        //dd($isCleared);
+        dd($enquiries);
         /*if($searchTerm != null)
         $enquiries = Enquiry::search($searchTerm)->get();
         else
@@ -203,6 +204,14 @@ class EnquiryController extends Controller
         } else {
             return view('enquiries.diary', compact('enquiries', 'datePeriod'));
         }
+
+    }
+
+    public function downloadPDF($id)
+    {
+        $enquiry = Enquiry::find($id);
+        $pdf = PDF::loadView('enquiries.pdf', compact('enquiry'));
+        return $pdf->download('enquiry.pdf');
 
     }
 

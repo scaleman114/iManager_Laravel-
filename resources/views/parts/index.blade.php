@@ -35,7 +35,7 @@
 <div class="row">
     <div>
         <div class="col-md-3">
-            <a href="{{ url('/parts/create') }}" class="btn btn-success">Add New</a>
+            <a href="{{ url('/zohoparts') }}" class="btn btn-success">Refresh from Zoho</a>
         </div>
     </div>
     <div class="col-md-3">
@@ -77,7 +77,7 @@
         <tbody>
             @foreach($parts as $part)
             <tr>
-                <td>{{$part->id}}</td>
+                <td>{{$part->part_id}}</td>
                 <td>{{$part->description}}</td>
                 <td>{{$part->cost}}</td>
                 <td>{{$part->price}}</td>

@@ -16,7 +16,14 @@ Route::get('/', function () {
 });
 
 Route::get('enquiries/diary', 'EnquiryController@getdate')->name('enquiries.diary');
+Route::get('enquiries/{id}/downloadPDF', 'EnquiryController@downloadPDF');
 Route::resource('enquiries', 'EnquiryController');
+
+Route::get('contracts/{id}/downloadPDF', 'ContractController@downloadPDF');
+Route::resource('contracts', 'ContractController');
+
+Route::resource('contractitems', 'ContractItemsController');
+Route::get('contract/{contract_id}/contractitems/create', 'ContractItemsController@create')->name('contractitems.create');
 
 //Auth::routes(['register'=>false]);
 Auth::routes();
@@ -34,6 +41,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('parts', 'PartController');
 
 Route::resource('groups', 'GroupController');
+Route::get('groups/{id}/edit', 'GroupController@zedit')->name('zohogroups.edit');
 
 Route::get('/signin', 'OAuth2Controller@signin');
 Route::get('/authorize', 'OAuth2Controller@gettoken');
@@ -42,7 +50,11 @@ Route::resource('zohocontacts', 'ZohoController');
 Route::get('contacts/{id}/edit', 'ZohoController@zedit')->name('zohocontacts.edit');
 //fetches from zoho
 Route::get('/zohocontacts', 'ZohoController@contacts')->name('zohocontacts');
+Route::get('/zohoparts', 'PartController@parts')->name('zohoparts');
+Route::get('/zohogroups', 'GroupController@groups')->name('zohogroups');
 //fetches from db
 Route::get('/contacts', 'ZohoController@index')->name('zohocontacts.index');
+Route::get('/parts', 'PartController@index')->name('zohoparts.index');
+Route::get('/groups', 'GroupController@index')->name('zohogroups.index');
 
 //Route::post('contacts/{id}/update', 'ZohoController@zupdate')->name('zohocontacts.update');

@@ -2,9 +2,9 @@
 
 @section('content')
 <style>
-    .uper {
+.uper {
     margin-top: 40px;
-  }
+}
 </style>
 <div class="card uper">
     <div class="card-header">
@@ -32,7 +32,8 @@
                 <label for="group_id">Name :</label>
                 <select class="form-control" name="group_id" value="{{  $part->group_id  }}">
                     @foreach($groups as $group)
-                    <option value="{{$group->id}}" {{$part->group_id==$group->id ? 'selected' : ''}}>{{$group->name}}</option>
+                    <option value="{{$group->id}}" {{$part->group_id==$group->id ? 'selected' : ''}}>{{$group->name}}
+                    </option>
                     @endforeach
 
                 </select>
@@ -74,7 +75,7 @@
 
 
             <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{route('parts.index')}}" class="btn btn-secondary">Cancel</a>
+            <a href="{{route('zohoparts.index')}}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

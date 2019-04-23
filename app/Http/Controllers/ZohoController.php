@@ -46,12 +46,14 @@ class ZohoController extends Controller
         try {
             $client = new Client();
 
-            $res = $client->get("https://books.zoho.com/api/v3/contacts", ['query' => $query, "headers" => $headers,
+            $res = $client->get(env('ZOHO_BOOKS_API') . '/contacts', ['query' => $query, "headers" => $headers,
             ]);
 
             $result = json_decode($res->getBody()->getContents(), true);
-
+            $status = $result['code'];
             //dd($result);
+            $hasmore = $result['page_context']['has_more_page'];
+            //dd($hasmore);
 
             foreach ($result['contacts'] as $value) {
                 $zcontact = new ZohoContact;
@@ -70,13 +72,13 @@ class ZohoController extends Controller
             //unauthorised
             if ($e->getCode() == 401) {
                 exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
+            } else {
+                exit('ERROR - Request was:' . Psr7\str($e->getRequest()) . ' - Response was:' . Psr7\str($e->getResponse()));
             }
 
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
         }
-        //echo $count."<br>";
-        return $count;
+        //return count and hasmore bool - has to be an array as 2 things returned
+        return array($count, $hasmore, $status);
 
     }
     //Gets all contacts from zoho
@@ -99,16 +101,32 @@ class ZohoController extends Controller
 
         $totalloaded = 0;
         //Run the query for 4 pages, need to alter this at some point so it collects automatically.
-        for ($i = 1; $i < 5; $i++) {
-
-            $totalloaded += $this->fetchContacts($i, $access_token);
+        //for ($i = 1; $i < 5; $i++) {
+        $i = 1;
+        $morepages = true;
+        while ($morepages == true) {
+            //$fetched is the returned array
+            $fetched = $this->fetchContacts($i, $access_token);
+            $totalloaded += $fetched[0];
+            $morepages = $fetched[1];
+            $i++;
+            //dd($morepages, $i);
 
         }
+
+        //}
         //echo 'Number of contacts added = '.$totalloaded."<br>";
 
         $contacts = ZohoContact::all();
         //dd($contacts);
-        header('Location: ' . '/contacts');
+        //if no error
+        if ($fetched[2] == 0) {
+            return redirect('/contacts')->with('success', 'Zoho contacts updated');
+        } else {
+            return redirect('/contacts')->with('error', 'Error:' . $fetched[2]);
+        }
+
+        //return redirect('/contacts')->with('error', 'Zoho Contacts have been updated');
         //return view('zohocontacts.index', compact('contacts', 'totalloaded'));
 
         /*foreach ($result['contacts'] as $value) {
@@ -168,7 +186,7 @@ class ZohoController extends Controller
         try {
             $client = new Client();
 
-            $res = $client->get("https://books.zoho.com/api/v3/contacts/" . $id, ['query' => $query, "headers" => $headers,
+            $res = $client->get(env('ZOHO_BOOKS_API') . '/contacts/' . $id, ['query' => $query, "headers" => $headers,
             ]);
 
             $result = json_decode($res->getBody()->getContents(), true);
@@ -199,7 +217,8 @@ class ZohoController extends Controller
             if ($e->getCode() == 401) {
                 exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
             } else {
-                exit('ERROR: ' . $e->getCode());
+                exit('ERROR - Request was:' . Psr7\str($e->getRequest()) . ' - Response was:' . Psr7\str($e->getResponse()));
+                //exit('ERROR: ' . $e->getCode());
             }
             return;
 
@@ -311,10 +330,10 @@ class ZohoController extends Controller
         try {
             $client = new Client();
             //Send to contacts
-            $res = $client->put("https://books.zoho.com/api/v3/contacts/" . $zcontact->contact_id,
+            $res = $client->put(env('ZOHO_BOOKS_API') . '/contacts/' . $zcontact->contact_id,
                 ['query' => $query, "headers" => $headers, 'form_params' => $body]);
             //Send to contact persons
-            $res = $client->put("https://books.zoho.com/api/v3/contacts/contactpersons/" . $zcontact->primary_contactId,
+            $res = $client->put(env('ZOHO_BOOKS_API') . '/contacts/contactpersons/' . $zcontact->primary_contactId,
                 ['query' => $query, "headers" => $headers, 'form_params' => $body2]);
 
             //dd($res);
@@ -323,7 +342,80 @@ class ZohoController extends Controller
             if ($e->getCode() == 401) {
                 exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
             } else {
-                exit('ERROR: ' . $e->getCode());
+                exit('ERROR - Request was:' . Psr7\str($e->getRequest()) . ' - Response was:' . Psr7\str($e->getResponse()));
+                //exit('ERROR: ' . $e->getCode());
+            }
+            return;
+            //exit($e->getCode());
+            //return $e->getCode();
+            //dd($e->getCode());
+            //echo $e->getCode();
+
+            //echo Psr7\str($e->getRequest());
+            //echo Psr7\str($e->getResponse());
+        }
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $contact = ZohoContact::find($id);
+        //dd($id);
+        if ($contact != null) {
+            $contact->delete();
+            self::zdestroy($contact->contact_id);
+            return redirect('/contacts')->with('success', 'Contact has been deleted Successfully');
+        }
+
+        //delete from zoho
+
+        return redirect('/contacts')->with('ERROR', 'Wrong ID');
+    }
+
+    //destroy the contact in zoho books
+    private function zdestroy($zcontact_id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        //Create new instance of TokenCache
+        $tokenCache = new \App\TokenStore\TokenCache;
+
+        //$tokenCache->clearTokens();
+        //echo 'Token: '.$tokenCache->getAccessToken();
+        //dd($zcontact_id);
+        $access_token = $tokenCache->getAccessToken();
+        $query = ([
+            'organization_id' => env('OAUTH_ORGANIZATION_ID'),
+
+        ]);
+        //Add the headers
+        $headers = ([
+            'Authorization' => 'Zoho-oauthtoken ' . $access_token,
+            'Content-type' => "application/x-www-form-urlencoded;charset=UTF-8",
+
+        ]);
+
+        try {
+            $client = new Client();
+            //Send to contacts
+            $res = $client->delete(env('ZOHO_BOOKS_API') . '/contacts/' . $zcontact_id,
+                ['query' => $query, "headers" => $headers]);
+
+            //dd($res);
+        } catch (ClientException $e) {
+            //unauthorised
+            if ($e->getCode() == 401) {
+                exit('ERROR getting tokens: ' . $e->getMessage() . header('Location: ' . '/signin'));
+            } else {
+                exit('ERROR - Request was:' . Psr7\str($e->getRequest()) . ' - Response was:' . Psr7\str($e->getResponse()));
+                //exit('ERROR: ' . $e->getCode());
             }
             return;
             //exit($e->getCode());

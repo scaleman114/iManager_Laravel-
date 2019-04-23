@@ -2,14 +2,14 @@
 
 @section('content')
 <style>
-    .uper {
+.uper {
     margin-top: 40px;
-  }
+}
 </style>
 
 <div>
     <div class="col-md-12">
-        <a href="{{ url('/groups/create') }}" class="btn btn-success">Add New</a>
+        <a href="{{ url('/zohogroups') }}" class="btn btn-success">Refresh from Zoho</a>
     </div>
 </div>
 
@@ -33,7 +33,7 @@
         <tbody>
             @foreach($groups as $group)
             <tr>
-                <td>{{$group->id}}</td>
+                <td>{{$group->group_id}}</td>
                 <td>{{$group->name}}</td>
 
 
@@ -43,7 +43,8 @@
                     <form action="{{ route('groups.destroy', $group->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')"
+                            type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -56,7 +57,8 @@
             <form method="GET">
                 {{csrf_field()}}
                 <div class="input-group">
-                    <input type="text" class="form-control" name="searchTerm" placeholder="Search for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
+                    <input type="text" class="form-control" name="searchTerm" placeholder="Search for..."
+                        value="{{ isset($searchTerm) ? $searchTerm : '' }}">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="submit">Search</button>
                     </span>

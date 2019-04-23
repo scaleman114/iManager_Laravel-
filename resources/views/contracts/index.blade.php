@@ -1,4 +1,4 @@
-@extends('zohocontacts.layout')
+@extends('contracts.layout')
 
 @section('content')
 <style>
@@ -31,13 +31,13 @@
 </div>
 
 
+
 <div class="row">
     <div>
         <div class="col-md-3">
-            <a href="{{ url('/zohocontacts') }}" class="btn btn-success">Refresh from Zoho</a>
+            <a href="{{ url('/contracts/create') }}" class="btn btn-success">Add New</a>
         </div>
     </div>
-
     <div class="col-md-3">
         <form method="GET">
             {{csrf_field()}}
@@ -52,69 +52,56 @@
     </div>
 </div>
 
-<div class="uper">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        {{ $message }}
-    </div>
-    @endif
 
-    @if ($message = Session::get('error'))
-    <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        {{ $message }}
+
+<div class="uper">
+    @if(session()->get('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
     </div>
     @endif
 
     <table class="table table-hover">
         <thead>
             <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Email</td>
-                <td>Phone</td>
+                <td>Contract Id</td>
+                <td>Customer</td>
+                <td>Commence</td>
 
-                <td colspan="2">Action</td>
+                <td>Updated</td>
+
+                <td colspan="3">Action</td>
             </tr>
         </thead>
         <tbody>
-            @foreach($contacts as $contact)
+            @foreach($contracts as $contract)
             <tr>
-                <td>{{$contact->contact_id}}</td>
-                <td>{{$contact->customer_name}}</td>
-                <td>{{$contact->customer_email}}</td>
-                <td>{{$contact->customer_phone}}</td>
+                <td>{{$contract->contract_id}}</td>
+                <td>{{$contract->contract_customer}}</td>
+                <td>{{ date('d/m/y', strtotime($contract->contract_startdate)) }}</td>
+
+                <td>{{ date('d/m/y', strtotime($contract->updated_at)) }}</td>
 
 
-
-                <td> <a href="{{ route('zohocontacts.edit',$contact->contact_id)}}" class="btn btn-primary">Edit</a>
-                </td>
+                <td><a href="{{ route('contracts.edit',$contract->id)}}" class="btn btn-primary">Edit</a></td>
                 <td>
-                    <form action="{{ route('zohocontacts.destroy',$contact->id)}}" method="post">
+                    <form action="{{ route('contracts.destroy', $contract->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')"
-                            type="submit">Delete</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
+                <td><a href="{{action('ContractController@downloadPDF', $contract->id)}}"
+                        class="btn btn-info btn-sm">PDF</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
 
-</div>
-
-<script>
-$(".delete").on("submit", function() {
-    return confirm("Are you sure?");
-});
-</script>
 
 
 
 
 
-
-@endsection
+    @endsection

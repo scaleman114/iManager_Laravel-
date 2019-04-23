@@ -71,7 +71,7 @@
                 <td>Completed</td>
                 <td>Updated</td>
                 <td>Diary Date</td>
-                <td colspan="2">Action</td>
+                <td colspan="3">Action</td>
             </tr>
         </thead>
         <tbody>
@@ -93,6 +93,8 @@
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
+                <td><a href="{{action('EnquiryController@downloadPDF', $enquiry->id)}}"
+                        class="btn btn-info btn-sm">PDF</a></td>
             </tr>
             @endforeach
         </tbody>

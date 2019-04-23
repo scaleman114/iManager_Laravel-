@@ -15,15 +15,14 @@ class Part extends Model
         'notes',
         'stock_item',
         'supplier_id',
-        'group_id'
-      ];
+        'group_id',
+    ];
 
-      public static function scopeSearch($query, $searchTerm)
-      {
-          return $query->where('id', '=', $searchTerm)
-                       ->orWhere('description', 'like', '%' .$searchTerm. '%');
-                       
-      } 
+    public static function scopeSearch($query, $searchTerm)
+    {
+        return $query->where('id', '=', $searchTerm)
+            ->orWhere('description', 'like', '%' . $searchTerm . '%');
 
+    }
 
 }

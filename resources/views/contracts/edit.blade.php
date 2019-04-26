@@ -98,8 +98,8 @@
 
             <div class="form-group">
                 <label for="notes">Contract Notes :</label>
-                <textarea class="form-control" name="contract_notes" placeholder="Notes"
-                    value="{{ $contract->contract_notes }}"></textarea>
+                <textarea class="form-control" name="contract_notes">
+                    {{ $contract->contract_notes }}</textarea>
             </div>
 
             <div class="form-row">

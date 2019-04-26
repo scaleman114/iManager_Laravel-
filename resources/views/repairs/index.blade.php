@@ -76,7 +76,7 @@
         <tbody>
             @foreach($repairs as $repair)
             <tr>
-                <td>{{$repair->repair_id}}</td>
+                <td>{{$repair->id}}</td>
                 <td>{{$repair->repair_customer}}</td>
                 <td>{{ date('d/m/y', strtotime($repair->date)) }}</td>
 

@@ -25,8 +25,8 @@ Route::resource('contracts', 'ContractController');
 Route::resource('contractitems', 'ContractItemsController');
 Route::get('contract/{contract_id}/contractitems/create', 'ContractItemsController@create')->name('contractitems.create');
 
-Route::get('repairs/{id}/downloadPDF', 'RepairController@downloadPDF');
 Route::resource('repairs', 'RepairController');
+Route::get('repairs/{id}/downloadPDF', 'RepairController@downloadPDF');
 
 Route::resource('repairitems', 'RepairItemController');
 Route::get('repair/{repair_id}/repairitems/create', 'RepairItemController@create')->name('repairitems.create');

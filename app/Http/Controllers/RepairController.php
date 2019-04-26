@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repair;
+use App\RepairItem;
 use App\ZohoContact;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,11 @@ class RepairController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $repairs = Repair::all();
+        $searchTerm = $request->input('searchTerm');
+
+        $repairs = Repair::search($searchTerm)->get();
         return view('repairs.index', compact('repairs'));
     }
 
@@ -84,9 +87,15 @@ class RepairController extends Controller
      * @param  \App\Repair  $repair
      * @return \Illuminate\Http\Response
      */
-    public function edit(Repair $repair)
+    public function edit($id)
     {
-        //
+        $repair = repair::find($id);
+        $zohocontacts = ZohoContact::all(['customer_name']);
+        //dd($repair);
+        $repairitems = repairItem::repair($id)->get();
+        //dd($repairitems);
+        return view('repairs.edit', compact('repair', 'zohocontacts', 'repairitems'));
+
     }
 
     /**
@@ -96,9 +105,28 @@ class RepairController extends Controller
      * @param  \App\Repair  $repair
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Repair $repair)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'repair_customer' => 'required',
+
+        ]);
+
+        $repair = Repair::find($id);
+
+        $repair->id = $request->get('repair_id');
+        $repair->repair_customer = $request->get('repair_customer');
+
+        $repair->date = $request->input('repair_date');
+        $repair->min_charge = $request->input('min_charge');
+        $repair->quoted = $request->input('quoted');
+        $repair->hours = $request->input('hours');
+        $repair->notes = $request->get('repair_notes');
+        $repair->repair_type = $request->get('repair_type');
+
+        $repair->save();
+
+        return redirect('/repairs')->with('success', 'Repair has been updated');
     }
 
     /**

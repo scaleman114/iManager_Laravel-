@@ -1,4 +1,4 @@
-@extends('contracts.layout')
+@extends('repairs.layout')
 
 @section('content')
 <style>
@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
     <div class="card-header">
-        Edit Contract
+        Edit Repair
     </div>
     <div class="card-body">
         @if ($errors->any())
@@ -20,21 +20,21 @@
             </ul>
         </div><br />
         @endif
-        <form method="post" action="{{ route('contracts.update', $contract->id) }}">
+        <form method="post" action="{{ route('repairs.update', $repair->id) }}">
             @method('PATCH')
             @csrf
 
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="id">Contract Id :</label>
-                    <input class="form-control" type="text" name="contract_id" value="{{ $contract->contract_id }}">
+                    <label for="id">Repair Id :</label>
+                    <input class="form-control" type="text" name="repair_id" value="{{ $repair->id }}">
                 </div>
                 <div class="form-group col-md-9">
                     <label for="zcontact">Customer :</label>
-                    <select class="form-control" name="contract_customer">
+                    <select class="form-control" name="repair_customer">
                         @foreach($zohocontacts as $zcontact)
                         <option value="{{$zcontact->customer_name}}" @if ($zcontact->
-                            customer_name==$contract->contract_customer)
+                            customer_name==$repair->repair_customer)
                             selected="selected" @endif>{{ $zcontact->customer_name }}
                         </option>
                         @endforeach
@@ -44,71 +44,70 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="startdate">Commence :</label>
+                    <label for="date">Repair Date :</label>
                     <div class="input-group datepick">
-                        <input class="form-control" type="text" id="datepicker" name="contract_startdate"
-                            value="{{ $contract->contract_startdate }}" maxlength="10">
+                        <input class="form-control" type="text" id="datepicker" name="repair_date"
+                            value="{{ $repair->date }}" maxlength="10">
 
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="form-group col-md-6">
-                    <label for="terms">Terms :</label>
-                    <input class="form-control" type="text" name="contract_terms"
-                        value="{{ $contract->contract_terms }}">
+                    <label for="type">Repair Type :</label>
+                    <select class="form-control" name="repair_type" placeholder="Type"
+                        value="{{ $repair->repair_type }}" />
+                    <option value=0 @if ($repair->repair_type==0)
+                        selected="selected" @endif>{{ \App\Enums\RepairType::getDescription(0) }}</option>
+                    <option value=1 @if ($repair->repair_type==1)
+                        selected="selected" @endif>
+                        {{ \App\Enums\RepairType::getDescription(1) }}</option>
+                    <option value=2 @if ($repair->repair_type==2)
+                        selected="selected" @endif>{{ \App\Enums\RepairType::getDescription(2) }}</option>
+                    <option value=3 @if ($repair->repair_type==3)
+                        selected="selected" @endif>{{ \App\Enums\RepairType::getDescription(3) }}</option>
+                    </select>
                 </div>
+
+
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="premium">Contract Premium :</label>
-                    <input class="form-control" type="number" min="0.01" step="0.01" name="contract_premium"
-                        value="{{ $contract->contract_premium }}">
-                </div>
+                    <label for="mincharge">Min. Charge :</label>
+                    <input type="number" min="0.01" step="0.01" class="form-control" type="text" name="min_charge"
+                        value="{{ $repair->min_charge }}">
 
-                <div class="form-group col-md-4">
-                    <label for="period">Contract Period :</label>
-                    <input type="number" min="1" max="48" class="form-control" name="contract_period"
-                        value="{{ $contract->contract_period }}" />
                 </div>
-
 
 
                 <div class="form-group col-md-4">
-                    <label for="type">Contract Type :</label>
-                    <select class="form-control" name="contract_type" placeholder="Type"
-                        value="{{ $contract->contract_type }}" />
-                    <option value=0 @if ($contract->contract_type==0)
-                        selected="selected" @endif>{{ \App\Enums\ContractType::getDescription(0) }}</option>
-                    <option value=1 @if ($contract->contract_type==1)
-                        selected="selected" @endif>
-                        {{ \App\Enums\ContractType::getDescription(1) }}</option>
-                    <option value=2 @if ($contract->contract_type==2)
-                        selected="selected" @endif>{{ \App\Enums\ContractType::getDescription(2) }}</option>
-                    <option value=3 @if ($contract->contract_type==3)
-                        selected="selected" @endif>{{ \App\Enums\ContractType::getDescription(3) }}</option>
-                    </select>
+                    <label for="terms">Quoted :</label>
+                    <input type="number" min="0.01" step="0.01" class="form-control" type="text" name="quoted"
+                        value="{{ $repair->quoted }}">
                 </div>
 
+                <div class="form-group col-md-4">
+                    <label for="terms">Hours :</label>
+                    <input type="number" min="0.5" step="0.25" class="form-control" type="text" name="hours"
+                        value="{{ $repair->hours }}">
+                </div>
             </div>
 
+
             <div class="form-group">
-                <label for="notes">Contract Notes :</label>
-                <textarea class="form-control" name="contract_notes" placeholder="Notes"
-                    value="{{ $contract->contract_notes }}"></textarea>
+                <label for="notes">Repair Notes :</label>
+                <textarea class="form-control" name="repair_notes"> {{ $repair->notes }} </textarea>
             </div>
 
             <div class="form-row">
                 <div class="col-md-6"> <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{route('contracts.index')}}" class="btn btn-secondary">Cancel</a>
+                    <a href="{{route('repairs.index')}}" class="btn btn-secondary">Cancel</a>
                 </div>
                 <div class="col-md-6">
 
-                    <a href="{{ route('contractitems.create',$contract->id)}}" class="btn btn-success">Add New</a>
+                    <a href="{{ route('repairitems.create',$repair->id)}}" class="btn btn-success">Add New</a>
 
                 </div>
             </div>
@@ -127,7 +126,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($contractitems as $items)
+                @foreach($repairitems as $items)
                 <tr>
                     <td>{{$items->id}}</td>
                     <td>{{$items->mc_type}}</td>

@@ -17,4 +17,11 @@ class Repair extends Model
         'hours',
 
     ];
+
+    public static function scopeSearch($query, $searchTerm)
+    {
+        return $query->where('id', '=', $searchTerm)
+            ->orWhere('repair_customer', 'like', '%' . $searchTerm . '%');
+
+    }
 }

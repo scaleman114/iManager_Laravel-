@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
     <div class="card-header">
-        Add Contract Item: {{ $contract->contract_customer }}
+        Add Item: {{ $contract->contract_customer }}
     </div>
     <div class="card-body">
         @if ($errors->any())

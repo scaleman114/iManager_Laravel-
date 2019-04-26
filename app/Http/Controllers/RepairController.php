@@ -1,0 +1,122 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Repair;
+use App\ZohoContact;
+use Illuminate\Http\Request;
+
+class RepairController extends Controller
+{
+
+    //this ensures you have to be logged on to access 'repairs'
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $repairs = Repair::all();
+        return view('repairs.index', compact('repairs'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $zohocontacts = ZohoContact::all(['customer_name']);
+        return view('repairs.create', compact('zohocontacts'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'repair_customer' => 'required',
+
+        ]);
+
+        $zcontact = ZohoContact::where('customer_name', '=', $request->get('repair_customer'))->first();
+        //dd($zcontact);
+        $repair = new repair([
+            'repair_customer' => $request->get('repair_customer'),
+            'date' => $request->get('date'),
+            'repair_type' => $request->get('repair_type'),
+            'min_charge' => $request->get('min_charge'),
+            'quoted' => $request->get('quoted'),
+            'hours' => $request->input('hours'),
+            'notes' => $request->get('notes'),
+
+        ]);
+        //dd($repair);
+        $repair->save();
+        return redirect('/repairs')->with('success', 'Repair has been added');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Repair  $repair
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Repair $repair)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Repair  $repair
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Repair $repair)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Repair  $repair
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Repair $repair)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Repair  $repair
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Repair $repair)
+    {
+        //
+    }
+
+    public function downloadPDF($id)
+    {
+        /*  $repair = Repair::find($id);
+    $pdf = PDF::loadView('repairs.pdf', compact('repair'));
+    return $pdf->download('repair.pdf'); */
+
+    }
+}

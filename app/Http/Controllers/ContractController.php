@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ContractController extends Controller
 {
-    //this ensures you have to be logged on to access 'enquiries'
+    //this ensures you have to be logged on to access 'contracts'
     public function __construct()
     {
         $this->middleware('auth');

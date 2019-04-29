@@ -45,7 +45,7 @@ class EnquiryController extends Controller
             ->orderby('updated_at', 'desc')
             ->get();
 
-        dd($enquiries);
+        //dd($enquiries);
         /*if($searchTerm != null)
         $enquiries = Enquiry::search($searchTerm)->get();
         else

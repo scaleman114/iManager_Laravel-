@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repair;
 use App\RepairItem;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class RepairItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $repair = Repair::find($id);
         return view('repairitems.create', compact('repair'));
@@ -42,13 +43,13 @@ class RepairItemController extends Controller
         ]);
 
         $repairitem = new RepairItem([
-            'repair_id' => $request->get('contract_id'),
+            'repair_id' => $request->get('repair_id'),
             'mc_type' => $request->get('mc_type'),
             'serial_no' => $request->get('serial_no'),
             'capacity' => $request->get('capacity'),
 
         ]);
-        //dd($contract);
+        //dd($repairitem);
         $repairitem->save();
         return redirect('/repairs')->with('success', 'Repair Item has been added');
     }
@@ -70,9 +71,13 @@ class RepairItemController extends Controller
      * @param  \App\RepairItem  $repairItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(RepairItem $repairItem)
+    public function edit($id)
     {
-        //
+        $repairitem = RepairItem::find($id);
+
+        //dd($repairitem);
+
+        return view('repairitems.edit', compact('repairitem'));
     }
 
     /**
@@ -82,9 +87,22 @@ class RepairItemController extends Controller
      * @param  \App\RepairItem  $repairItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RepairItem $repairItem)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'serial_no' => 'required',
+
+        ]);
+
+        $repairitem = RepairItem::find($id);
+        //dd($repairItem);
+        $repairitem->repair_id = $request->get('repair_id');
+        $repairitem->mc_type = $request->get('mc_type');
+        $repairitem->serial_no = $request->get('serial_no');
+        $repairitem->capacity = $request->get('capacity');
+        $repairitem->save();
+
+        return redirect('/repairs/' . $repairitem->repair_id . '/edit')->with('success', 'Repair Item has been updated');
     }
 
     /**
@@ -93,8 +111,14 @@ class RepairItemController extends Controller
      * @param  \App\RepairItem  $repairItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RepairItem $repairItem)
+    public function destroy($id)
     {
-        //
+        $repairitem = repairitem::find($id);
+        //dd($id);
+        if ($repairitem != null) {
+            $repairitem->delete();
+            return redirect('/repairs')->with('success', 'Item has been deleted Successfully');
+        }
+        return redirect('/repairs')->with('ERROR', 'Wrong ID');
     }
 }

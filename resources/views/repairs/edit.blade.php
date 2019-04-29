@@ -122,7 +122,7 @@
 
                     <td>Updated</td>
 
-                    <td colspan="3">Action</td>
+                    <td colspan="2">Action</td>
                 </tr>
             </thead>
             <tbody>
@@ -135,6 +135,14 @@
 
 
                     <td>{{ date('d/m/y', strtotime($items->updated_at)) }}</td>
+                    <td><a href="{{ route('repairitems.edit',$items->id)}}" class="btn btn-primary">Edit</a></td>
+                    <td>
+                        <form action="{{ route('repairitems.destroy', $items->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
 
 
 

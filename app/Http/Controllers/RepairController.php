@@ -135,9 +135,15 @@ class RepairController extends Controller
      * @param  \App\Repair  $repair
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Repair $repair)
+    public function destroy($id)
     {
-        //
+        $repair = repair::find($id);
+        //dd($id);
+        if ($repair != null) {
+            $repair->delete();
+            return redirect('/repairs')->with('success', 'Repair has been deleted Successfully');
+        }
+        return redirect('/repairs')->with('ERROR', 'Wrong ID');
     }
 
     public function downloadPDF($id)

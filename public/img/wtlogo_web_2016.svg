@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="911.03998"
+   height="310.42999"
+   id="svg3043"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="wtlogo_web_2016.svg"
+   inkscape:export-filename="/Users/dave/Documents/Inkscape/wtlogo_web_2016.png"
+   inkscape:export-xdpi="58.289482"
+   inkscape:export-ydpi="58.289482">
+  <defs
+     id="defs3045">
+    <linearGradient
+       id="linearGradient4590">
+      <stop
+         style="stop-color:#550000;stop-opacity:1;"
+         offset="0"
+         id="stop4592" />
+      <stop
+         style="stop-color:#550000;stop-opacity:0;"
+         offset="1"
+         id="stop4594" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4457"
+       is_visible="true"
+       pattern="m 43.117323,94.858111 0,9.999999 10,-4.999999 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-984.76003 : 122.35391 : 1"
+       inkscape:vp_y="0 : 4175.416 : 0"
+       inkscape:vp_z="676.97287 : 225.47805 : 1"
+       inkscape:persp3d-origin="-155.42852 : -506.86362 : 1"
+       id="perspective3051" />
+    <inkscape:perspective
+       id="perspective3061"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3880"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.45"
+     inkscape:cx="467.3311"
+     inkscape:cy="105.53101"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1873"
+     inkscape:window-height="949"
+     inkscape:window-x="61"
+     inkscape:window-y="2"
+     inkscape:window-maximized="0"
+     height="300px" />
+  <metadata
+     id="metadata3048">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(128.57877,-47.170849)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:148.88320923px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="18.083656"
+       y="227.74123"
+       id="text3928"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0339112,0.96720105)"
+       inkscape:export-xdpi="58.289482"
+       inkscape:export-ydpi="58.289482"><tspan
+         sodipodi:role="line"
+         id="tspan3930"
+         x="18.083656"
+         y="227.74123"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans'"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:148.88320923px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#800000"
+           id="tspan3932">Weigh</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:148.88320923px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#53676c"
+           id="tspan3934">-Till</tspan></tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#53676c;fill-opacity:1;fill-rule:nonzero;stroke:#53676c;stroke-width:0.31147346;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
+       d="m -6.9682534,314.18543 -39.6423386,43.26015 0.794587,-90.1349 81.596968,-0.27724 -42.7492164,47.15198 z"
+       id="rect3938"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-xdpi="58.289482"
+       inkscape:export-ydpi="58.289482" />
+    <path
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       id="path4451"
+       d="m -45.91069,280.77067 -0.333638,76.61676 -82.121422,-89.71988 82.331381,-69.95644 0.12371,83.05956 -3.1e-5,0 z"
+       style="fill:#800000;fill-opacity:1;fill-rule:nonzero;stroke:#53676c;stroke-width:0.4260388;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
+       inkscape:export-xdpi="58.289482"
+       inkscape:export-ydpi="58.289482" />
+    <path
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       id="path4453"
+       d="m -3.0031437,233.90129 39.5198347,33.18561 -82.600597,0.13436 0.0047,-69.10193 43.0766389,35.78196 z"
+       style="fill:#550000;fill-opacity:1;fill-rule:nonzero;stroke:#53676c;stroke-width:0.27439791;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
+       inkscape:export-xdpi="58.289482"
+       inkscape:export-ydpi="58.289482" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#550000;fill-opacity:1;stroke:#800000;stroke-width:3.83901072;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 33.833014,266.14399 C 760.08883,271.211 760.08883,271.211 760.08883,271.211 l 0.0418,-10.57027"
+       id="path4468"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="58.289482"
+       inkscape:export-ydpi="58.289482" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4277"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Hannotate TC';-inkscape-font-specification:'Hannotate TC';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-55.475322,51.998435)"
+       inkscape:export-xdpi="58.289482"
+       inkscape:export-ydpi="58.289482"><flowRegion
+         id="flowRegion4279"><rect
+           id="rect4281"
+           width="414.48282"
+           height="54.482746"
+           x="203.44827"
+           y="238.70586" /></flowRegion><flowPara
+         id="flowPara4283"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans'">www.weigh-till.co.uk</flowPara></flowRoot>  </g>
+</svg>

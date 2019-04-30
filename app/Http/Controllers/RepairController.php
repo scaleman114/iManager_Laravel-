@@ -6,6 +6,7 @@ use App\Repair;
 use App\RepairItem;
 use App\ZohoContact;
 use Illuminate\Http\Request;
+use PDF;
 
 class RepairController extends Controller
 {
@@ -148,9 +149,15 @@ class RepairController extends Controller
 
     public function downloadPDF($id)
     {
-        /*  $repair = Repair::find($id);
-    $pdf = PDF::loadView('repairs.pdf', compact('repair'));
-    return $pdf->download('repair.pdf'); */
+        $repair = Repair::find($id);
+        $zcontact = ZohoContact::where('customer_name', '=', ($repair->repair_customer))->first();
+        $contact = zgetcontact($zcontact->contact_id);
+        $address = $contact->address . "\r\n" . $contact->street2 . "\r\n" . $contact->city . " " . $contact->state . "\r\n" . $contact->zip;
+        //dd($address);
+        $repairitems = RepairItem::repair($id)->get();
+        //dd($repairitems);
+        $pdf = PDF::loadView('repairs.pdf', compact('repair', 'repairitems', 'address'));
+        return $pdf->download('repair.pdf');
 
     }
 }

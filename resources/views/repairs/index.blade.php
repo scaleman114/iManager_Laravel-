@@ -98,10 +98,4 @@
         </tbody>
     </table>
 
-
-
-
-
-
-
     @endsection

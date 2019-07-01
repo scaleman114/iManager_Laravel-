@@ -152,7 +152,8 @@ class RepairController extends Controller
         $repair = Repair::find($id);
         $zcontact = ZohoContact::where('customer_name', '=', ($repair->repair_customer))->first();
         $contact = zgetcontact($zcontact->contact_id);
-        $address = $contact->address . "\r\n" . $contact->street2 . "\r\n" . $contact->city . " " . $contact->state . "\r\n" . $contact->zip;
+        $address = $contact->customer_name . "\r\n" . $contact->address . "\r\n" . $contact->street2 . " " .
+        $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
         //dd($address);
         $repairitems = RepairItem::repair($id)->get();
         //dd($repairitems);

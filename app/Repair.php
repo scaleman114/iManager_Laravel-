@@ -21,7 +21,8 @@ class Repair extends Model
     public static function scopeSearch($query, $searchTerm)
     {
         return $query->where('id', '=', $searchTerm)
-            ->orWhere('repair_customer', 'like', '%' . $searchTerm . '%');
+            ->orWhere('repair_customer', 'like', '%' . $searchTerm . '%')
+            ->orderBy('date', 'desc');
 
     }
 }

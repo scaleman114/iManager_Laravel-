@@ -6,25 +6,42 @@
         <tr>
             <td>
                 <h6>Customer:</h6>
-                {{ $repair->repair_customer }}
+            </td>
+            <td colspan="2">
+                <h6>Details:</h6>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+
                 {!! nl2br(e($address)) !!}
 
 
             </td>
 
+            <td style="text-align:right">
+
+                Repair No:<br>
+                Date:<br>
+                Min. Charge:<br>
+                Quoted:<br>
+                Hours:
+            </td>
+
             <td>
-                <h6>Notes:</h6>
-                Repair No: {{ $repair->id }}<br>
-                Date: {{ date('d/m/y',strtotime($repair->date)) }}<br>
-                Min. Charge: {{ $repair->min_charge }}<br>
-                Quoted: {{ $repair->quoted }}<br>
-                Hours: {{ $repair->hours }}
+
+                {{ $repair->id }}<br>
+                {{ date('d/m/y',strtotime($repair->date)) }}<br>
+                {{ $repair->min_charge }}<br>
+                {{ $repair->quoted }}<br>
+                {{ $repair->hours }}
             </td>
 
 
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="3">
                 <h6>Description:</h6>
                 <p>{{$repair->notes}}</p>
             </td>
@@ -46,15 +63,9 @@
 
     <thead>
         <tr>
-
-
             <td>Machine</td>
             <td>Serial No.</td>
             <td>Capacity</td>
-
-
-
-
         </tr>
     </thead>
 
@@ -64,13 +75,9 @@
     @foreach($repairitems as $items)
     <tr>
 
-
-
         <td>{{ $items->mc_type }}</td>
         <td>{{ $items->serial_no }}</td>
         <td>{{ $items->capacity }}</td>
-
-
     </tr>
     @endforeach
 
@@ -78,14 +85,22 @@
 
 <div class="signaturestrip">
     <table>
+
+        <tr>
+            <td colspan="2">
+                <p>
+                    Engineer_____________________________________________
+                </p>
+            </td>
+
+
+
+        </tr>
         <tr>
             <td>
                 <p>I/We accept Weigh-Till T & Cs (available on request)<br><br>
                     Customer_____________________________________________
                 </p>
-
-
-
             </td>
 
             <td>
@@ -99,10 +114,6 @@
 
 
         </tr>
-
-
-
-
 
     </table>
 </div>

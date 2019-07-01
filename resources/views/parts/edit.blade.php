@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
     <div class="card-header">
-        Edit part
+        Edit part: {{ $part->part_id }}
     </div>
     <div class="card-body">
         @if ($errors->any())

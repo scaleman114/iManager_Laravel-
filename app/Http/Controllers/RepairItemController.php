@@ -51,7 +51,8 @@ class RepairItemController extends Controller
         ]);
         //dd($repairitem);
         $repairitem->save();
-        return redirect('/repairs')->with('success', 'Repair Item has been added');
+        return redirect('/repairs/' . $repairitem->repair_id . '/edit')->with('success', 'Repair item has been added');
+        //return redirect('/repairs')->with('success', 'Repair Item has been added');
     }
 
     /**
@@ -117,7 +118,9 @@ class RepairItemController extends Controller
         //dd($id);
         if ($repairitem != null) {
             $repairitem->delete();
-            return redirect('/repairs')->with('success', 'Item has been deleted Successfully');
+            //return redirect('/repairs')->with('success', 'Item has been deleted Successfully');
+            return redirect('/repairs/' . $repairitem->repair_id . '/edit')->with('success', 'Item has been deleted succesfully');
+
         }
         return redirect('/repairs')->with('ERROR', 'Wrong ID');
     }

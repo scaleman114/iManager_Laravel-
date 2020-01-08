@@ -78,8 +78,15 @@
                 <textarea class="form-control" name="notes" placeholder="Notes" /></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add</button>
-            <a href="{{route('repairs.index')}}" class="btn btn-secondary">Cancel</a>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6"> <button type="submit" class="btn btn-primary">Add</button>
+                    <a href="{{route('repairs.index')}}" class="btn btn-secondary">Cancel</a>
+                </div>
+
+            </div>
         </form>
     </div>
 </div>

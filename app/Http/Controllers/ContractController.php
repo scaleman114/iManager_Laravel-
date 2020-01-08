@@ -6,6 +6,7 @@ use App\Contract;
 use App\ContractItem;
 use App\ZohoContact;
 use Illuminate\Http\Request;
+use PDF;
 
 class ContractController extends Controller
 {

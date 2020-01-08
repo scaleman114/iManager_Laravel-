@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weigh-Till Manager Repairs</title>
     <!---*** Start: Bootstrap 3.3.7 version files. ***--->
-    <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!---*** End: Bootstrap 3.3.7 version files. ***--->
 
@@ -39,16 +40,16 @@
 
     header {
 
-        top: -60px;
+        top: -70px;
         left: 0px;
         right: 0px;
-        height: 50px;
+        height: 40px;
 
         /** Extra personal styles **/
         background-color: #03a9f4;
         color: white;
         text-align: center;
-        line-height: 35px;
+        line-height: 30px;
 
         /**font style **/
         font-size: 15px;
@@ -60,16 +61,38 @@
 
     footer {
         position: fixed;
-        bottom: -60px;
+        bottom: -70px;
         left: 0px;
         right: 0px;
-        height: 50px;
+        height: 40px;
 
         /** Extra personal styles **/
         background-color: #03a9f4;
         color: white;
         text-align: center;
-        line-height: 35px;
+        line-height: 30px;
+    }
+
+    .thead-inverse th {
+        color: #fff;
+        background-color: #373a3c;
+    }
+
+    .thead-light th {
+        color: #000;
+        background-color: #D3D3D3;
+    }
+
+    .thead-lightw th {
+        color: #fff;
+        background-color: #D3D3D3;
+        font-size: .8rem;
+
+    }
+
+    /** Means top & bottom 15px, right & left 10px **/
+    .gap {
+        margin: 15px 10px;
     }
     </style>
 
@@ -88,23 +111,27 @@
 
 <body>
     <div class="logo">
-        <img src="img/wtlogo.png" width="25%" height="25%" />
+        <img src="img/wt_logo_2019.png" width="25%" height="25%" />
     </div>
-    <header>
 
-        Weigh-Till Repair Sheet
+    <div class="gap">
+        <header>
 
-    </header>
+            Weigh-Till Repair Sheet
+
+        </header>
+    </div>
 
     <div class="container-fluid">
         @yield('content')
     </div>
+    <div class="gap">
+        <footer>
+            <p>Weigh-Till - Sparkenhoe House - Southfield Rd - Hinckley - LE10 1UB - Tel.: 01455 617227
+            </p>
 
-    <footer>
-        <p>Weigh-Till - Sparkenhoe House - Southfield Rd - Hinckley - LE10 1UB - Tel.: 01455 617227
-        </p>
-
-    </footer>
+        </footer>
+    </div>
 
 
 

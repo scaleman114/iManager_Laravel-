@@ -3,24 +3,25 @@
 @section('content')
 <div>
     <table class="table table-bordered">
-        <tr>
-            <td>
-                <h6>Customer:</h6>
-            </td>
-            <td colspan="2">
-                <h6>Details:</h6>
-            </td>
-        </tr>
 
+        <thead class="thead-lightw">
+            <tr>
+
+                <th>Customer</th>
+                <th colspan="2">Details</th>
+
+
+            </tr>
+        </thead>
         <tr>
+
             <td>
+
 
                 {!! nl2br(e($address)) !!}
-
-
             </td>
 
-            <td style="text-align:right">
+            <td style="text-align:right;font-weight:bold;">
 
                 Repair No:<br>
                 Date:<br>
@@ -55,17 +56,15 @@
 
 <table class="table table-bordered">
 
-    <tr>
-        <td colspan="3">
-            <h6>Item Details:</h6>
-        </td>
-    </tr>
 
-    <thead>
+
+    <thead class="thead-lightw">
         <tr>
-            <td>Machine</td>
-            <td>Serial No.</td>
-            <td>Capacity</td>
+
+            <th>Machine</th>
+            <th>Serial No.</th>
+            <th>Capacity</th>
+
         </tr>
     </thead>
 
@@ -89,7 +88,7 @@
         <tr>
             <td colspan="2">
                 <p>
-                    Engineer_____________________________________________
+                    <em>Engineer:</em>_______________________________________
                 </p>
             </td>
 
@@ -99,12 +98,12 @@
         <tr>
             <td>
                 <p>I/We accept Weigh-Till T & Cs (available on request)<br><br>
-                    Customer_____________________________________________
+                    <em>Customer:</em>_______________________________________
                 </p>
             </td>
 
             <td>
-                <p style="font-size:50%;">In the case of an electrical product repair we cannot guarantee that other
+                <p style="font-size:40%;">In the case of an electrical product repair we cannot guarantee that other
                     faults
                     will not develop within the 3 month warranty period. Electrical appliances are instruments
                     containing nmany components and within the repair the parts specified have been replaced.

@@ -83,7 +83,7 @@
                 <td>{{ date('d/m/y', strtotime($repair->updated_at)) }}</td>
 
 
-                <td><a href="{{ route('repairs.edit',$repair->id)}}" class="btn btn-primary">Edit</a></td>
+                <td><a href="{{ route('repairs.edit',$repair->id)}}" class="btn btn-primary">Edit/View</a></td>
                 <td>
                     <form action="{{ route('repairs.destroy', $repair->id)}}" method="post">
                         @csrf

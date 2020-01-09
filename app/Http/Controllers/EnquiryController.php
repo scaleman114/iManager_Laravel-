@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enquiry;
+use App\Http\Controllers\Notification;
+use App\Notifications\NewEnquiryAlert;
+use App\User;
 use App\ZohoContact;
 use Auth;
 use Illuminate\Http\Request;
@@ -99,7 +102,18 @@ class EnquiryController extends Controller
 
         //dd($enquiry);
         $enquiry->save();
+        //Send a notification
+        $users = User::select("email")->get();
+        //dd($users);
+
+        try {
+            \Notification::send($users, new NewEnquiryAlert($enquiry));
+        } catch (\Exception $e) {
+            return redirect('/enquiries')->with('success', 'Enquiry has been added but notification failed');
+        }
+
         return redirect('/enquiries')->with('success', 'Enquiry has been added');
+
     }
 
     /**

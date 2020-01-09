@@ -68,6 +68,7 @@ class RepairController extends Controller
         ]);
         //dd($repair);
         $repair->save();
+        //now return to edit the repair
         return redirect('/repairs/' . $repair->id . '/edit')->with('success', 'Repair has been added');
         //return redirect('/repairs')->with('success', 'Repair has been added');
     }

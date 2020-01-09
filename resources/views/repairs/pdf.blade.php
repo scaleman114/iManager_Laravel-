@@ -86,31 +86,40 @@
     <table>
 
         <tr>
-            <td colspan="2">
-                <p>
-                    <em>Engineer:</em>_______________________________________
-                </p>
+
+            <td style="vertical-align:bottom">
+                I/We accept Weigh-Till T & Cs (available on request)<br><br>
+                <em>Customer:</em>_______________________________________
+
             </td>
+
+
+
+            <td style="vertical-align:bottom">
+
+                <em>Engineer:</em>_______________________________________
+
+            </td>
+
+
+
+
+
 
 
 
         </tr>
-        <tr>
-            <td>
-                <p>I/We accept Weigh-Till T & Cs (available on request)<br><br>
-                    <em>Customer:</em>_______________________________________
-                </p>
-            </td>
 
-            <td>
-                <p style="font-size:40%;">In the case of an electrical product repair we cannot guarantee that other
-                    faults
+        <tr>
+            <td colspan="2" style="vertical-align:bottom">
+
+                <p style="font-size:50%;"><br><br>
+                    In the case of an electrical product repair we cannot guarantee that other faults
                     will not develop within the 3 month warranty period. Electrical appliances are instruments
-                    containing nmany components and within the repair the parts specified have been replaced.
+                    containing many components and within the repair the parts specified have been replaced.
                     The breakdown of other parts may cause a fault similar to the fault prior to the repair.</p>
 
             </td>
-
 
         </tr>
 

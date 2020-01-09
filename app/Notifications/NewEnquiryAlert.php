@@ -39,10 +39,12 @@ class NewEnquiryAlert extends Notification
      */
     public function toMail($notifiable)
     {
+        $user = \Auth::user();
+        //sdd($user);
         return (new MailMessage)
             ->level('info') // It is kind of email. Available options: info, success, error. Default: info
-            ->line('A new enquiry has been added.')
-            ->action('View Now', url('/'))
+            ->line($user->name . ' has added a new enquiry. ' . now())
+            ->action('View Now', url('/enquiries'))
             ->line('Thank you for using iManager!');
     }
 

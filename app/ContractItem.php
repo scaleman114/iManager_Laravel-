@@ -11,6 +11,8 @@ class ContractItem extends Model
         'mc_type',
         'serial_no',
         'capacity',
+        'increment',
+        'tolerance',
     ];
 
     public static function scopeContract($query, $contractId)

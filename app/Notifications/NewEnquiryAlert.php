@@ -39,6 +39,7 @@ class NewEnquiryAlert extends Notification
      */
     public function toMail($notifiable)
     {
+        //Get the current user
         $user = \Auth::user();
         //sdd($user);
         return (new MailMessage)

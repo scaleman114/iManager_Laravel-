@@ -102,7 +102,7 @@ class EnquiryController extends Controller
 
         //dd($enquiry);
         $enquiry->save();
-        //Send a notification
+        //Send a notification to all users
         $users = User::select("email")->get();
         //dd($users);
 

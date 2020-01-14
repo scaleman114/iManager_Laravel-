@@ -60,6 +60,11 @@
         {{ session()->get('success') }}
     </div>
     @endif
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+    @endif
 
     <table class="table table-hover">
         <thead>
@@ -93,6 +98,8 @@
                 </td>
                 <td><a href="{{action('RepairController@downloadPDF', $repair->id)}}"
                         class="btn btn-info btn-sm">PDF</a></td>
+                <td><a href="{{action('RepairController@emailPDF', $repair->id)}}" class="btn btn-info btn-sm">EMail</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

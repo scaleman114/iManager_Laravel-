@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('enquiries/diary', 'EnquiryController@getdate')->name('enquiries.diary');
 Route::get('enquiries/{id}/downloadPDF', 'EnquiryController@downloadPDF');
+
 Route::resource('enquiries', 'EnquiryController');
 
 Route::get('contracts/{id}/downloadPDF', 'ContractController@downloadPDF');
@@ -27,6 +28,7 @@ Route::get('contract/{contract_id}/contractitems/create', 'ContractItemsControll
 
 Route::resource('repairs', 'RepairController');
 Route::get('repairs/{id}/downloadPDF', 'RepairController@downloadPDF');
+Route::get('repairs/{id}/emailPDF', 'RepairController@emailPDF');
 
 Route::resource('repairitems', 'RepairItemController');
 Route::get('repair/{repair_id}/repairitems/create', 'RepairItemController@create')->name('repairitems.create');

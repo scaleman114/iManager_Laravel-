@@ -79,7 +79,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('.datepick').datetimepicker({
-        format: 'YYYY-MM-DD',
+        format: 'YYYY-MM-DD HH:mm',
         ignoreReadonly: true
     });
 });

@@ -210,12 +210,11 @@ class RepairController extends Controller
 
         } else {
 
-            $this->statusdesc = "Message sent Succesfully";
+            $this->statusdesc = "Message sent succesfully to:" . $data["email"];
             $this->statuscode = "1";
             return redirect('/repairs')->with('success', $this->statusdesc);
         }
         return response()->json(compact('this'));
-        //return redirect('/repairs')->with('success', $this->statusdesc);
 
     }
 }

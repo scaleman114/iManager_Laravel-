@@ -28,7 +28,7 @@ Route::get('contract/{contract_id}/contractitems/create', 'ContractItemsControll
 
 Route::resource('repairs', 'RepairController');
 Route::get('repairs/{id}/downloadPDF', 'RepairController@downloadPDF');
-Route::get('repairs/{id}/emailPDF', 'RepairController@emailPDF');
+Route::post('repairs/emailPDF', 'RepairController@emailPDF')->name('repair.emailpdf');
 
 Route::resource('repairitems', 'RepairItemController');
 Route::get('repair/{repair_id}/repairitems/create', 'RepairItemController@create')->name('repairitems.create');

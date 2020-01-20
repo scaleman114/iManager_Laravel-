@@ -98,11 +98,79 @@
                 </td>
                 <td><a href="{{action('RepairController@downloadPDF', $repair->id)}}"
                         class="btn btn-info btn-sm">PDF</a></td>
-                <td><a href="{{action('RepairController@emailPDF', $repair->id)}}" class="btn btn-info btn-sm">EMail</a>
+                <!--<td><a href="{{action('RepairController@emailPDF', $repair->id)}}" class="btn btn-info btn-sm">EMail</a>
+                </td>-->
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" id="email_btn" data-toggle="modal"
+                        data-target="#EmailModal" data-repairid="{{ $repair->id }}">
+
+                        Email PDF
+                    </button>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+
+
+
+
+    <!-- Modal HTML Markup -->
+    <div id="EmailModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title text-xs-center">Email the repair as pdf file</h4>
+
+
+                </div>
+
+                <div class="modal-body">
+
+
+                    <form role="form" method="POST" action="{{ route('repair.emailpdf')}}">
+
+                        <input type="hidden" name="_token" value="">
+                        <div class="form-group">
+                            @csrf
+                            <label class="control-label">E-Mail Address (if empty uses zoho default Email)</label>
+                            <div>
+                                <input type="email" class="form-control input-lg" name="email" value="">
+                            </div>
+
+                            <div>
+                                <input type="hidden" class="form-control input-lg" name="repair_id" value="">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div>
+
+                                <button type="submit" class="btn btn-info btn-block">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <!-- function to show the email modal -->
+    <script type="text/javascript">
+    $(function() {
+        $('#EmailModal').on("show.bs.modal", function(e) {
+            var repairId = $(e.relatedTarget).data('repairid');
+
+            //populate the textbox which is hidden
+            $(e.currentTarget).find('input[name="repair_id"]').val(repairId);
+
+        });
+    });
+    </script>
 
     @endsection

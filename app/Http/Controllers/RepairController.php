@@ -166,14 +166,18 @@ class RepairController extends Controller
         //Create the pdf from the view
         $pdf = PDF::loadView('repairs.pdf', compact('repair', 'repairitems', 'address'));
         //Download the pdf
-        return $pdf->download('repair.pdf');
+        return $pdf->download('repair_' . $id . '.pdf');
 
     }
 
-    public function emailPDF($id)
+    public function emailPDF(Request $request)
     {
+
         //Get the repair from the id
-        $repair = Repair::find($id);
+        $repair = Repair::find($request->get('repair_id'));
+        $formEmail = $request->get('email');
+
+        //dd($formEmail);
         //Get the contact from the db
         $zcontact = ZohoContact::where('customer_name', '=', ($repair->repair_customer))->first();
         //Get the zoho contact info & create an address
@@ -182,16 +186,23 @@ class RepairController extends Controller
         $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
         //dd($address);
         //Get the repair items
-        $repairitems = RepairItem::repair($id)->get();
+        $repairitems = RepairItem::repair($repair->id)->get();
         //dd($repairitems);
         //Create the pdf from the view
         $pdf = PDF::loadView('repairs.pdf', compact('repair', 'repairitems', 'address'));
         //Download the pdf
         //return $pdf->download('repair.pdf');
 
-        $data["email"] = $contact->customer_email;
+        $data["email"] = $formEmail;
+        //if no email supplied use the default email in zoho
+        if ($data["email"] == null) {
+            $data["email"] = $contact->customer_email;
+        }
+
         $data["client_name"] = $contact->customer_name;
         $data["subject"] = 'Repair Sheet ' . $repair->id;
+
+        //dd($data);
 
         try {
             \Mail::Send('repairs.mail', $data, function ($message) use ($data, $pdf) {

@@ -46,11 +46,12 @@ class EnquiryDates extends Command
         $datePeriod = 'week';
         //get any enquiries for that period
         $enquiries = Enquiry::Diary($datePeriod)->get();
+        $diarylist = '';
 
         //if any in the list send an email to each user with the customer & date
         if ($enquiries->count() > 0) {
             foreach ($enquiries as $el) {
-                $diarylist += $el->enq_customer . ':' . $el->enq_diarydate . '<br>';
+                $diarylist .= $el->enq_customer . ':' . $el->enq_diarydate . "\n";
             }
 
             foreach ($user as $a) {
@@ -60,14 +61,14 @@ class EnquiryDates extends Command
 
                 });
             }
-            $this->info('You have date alerts!' . $el->enq_diarydate);
+            $this->info('You have ' . $enquiries->count() . ' date alerts!' . $diarylist);
             //break;
 
         }
 
         //dd($enquiries);
         else {
-            $this->info('There ar no alerts this week!');
+            $this->info('There are no alerts this week!');
 
         }
 

@@ -50,18 +50,19 @@ class EnquiryDates extends Command
         //if any in the list send an email to each user with the customer & date
         if ($enquiries->count() > 0) {
             foreach ($enquiries as $el) {
-
-                foreach ($user as $a) {
-                    \Mail::raw($el->enq_customer . ':' . $el->enq_diarydate, function ($message) use ($a) {
-                        $message->from('accounts@weigh-till.co.uk');
-                        $message->to($a->email)->subject('Enquiry Weekly Update');
-
-                    });
-                }
-                $this->info('You have date alerts!' . $el->enq_diarydate);
-                //break;
-
+                $diarylist += $el->enq_customer . ':' . $el->enq_diarydate . '<br>';
             }
+
+            foreach ($user as $a) {
+                \Mail::raw($diarylist, function ($message) use ($a) {
+                    $message->from('accounts@weigh-till.co.uk');
+                    $message->to($a->email)->subject('Enquiry Weekly Update');
+
+                });
+            }
+            $this->info('You have date alerts!' . $el->enq_diarydate);
+            //break;
+
         }
 
         //dd($enquiries);

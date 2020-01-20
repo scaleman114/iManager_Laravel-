@@ -24,7 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('enquiry_dates:send')->weekly()->mondays()->at('06:00');
+        //$schedule->command('enquiry_dates:send')->weekly()->mondays()->at('06:00');
+        $schedule->command('enquiry_dates:send')->hourly();
     }
 
     /**

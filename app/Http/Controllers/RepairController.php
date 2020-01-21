@@ -87,7 +87,7 @@ class RepairController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Repair  $repair
+     * @param  \App\Repair  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -153,10 +153,8 @@ class RepairController extends Controller
     {
         //Get the repair from the id
         $repair = Repair::find($id);
-        //Get the contact from the db
-        $zcontact = ZohoContact::where('customer_name', '=', ($repair->repair_customer))->first();
         //Get the zoho contact info & create an address
-        $contact = zgetcontact($zcontact->contact_id);
+        $contact = zcontactfromname($repair->repair_customer);
         $address = $contact->customer_name . "\r\n" . $contact->address . "\r\n" . $contact->street2 . " " .
         $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
         //dd($address);
@@ -176,12 +174,8 @@ class RepairController extends Controller
         //Get the repair from the id
         $repair = Repair::find($request->get('repair_id'));
         $formEmail = $request->get('email');
-
-        //dd($formEmail);
-        //Get the contact from the db
-        $zcontact = ZohoContact::where('customer_name', '=', ($repair->repair_customer))->first();
         //Get the zoho contact info & create an address
-        $contact = zgetcontact($zcontact->contact_id);
+        $contact = zcontactfromname($repair->repair_customer);
         $address = $contact->customer_name . "\r\n" . $contact->address . "\r\n" . $contact->street2 . " " .
         $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
         //dd($address);

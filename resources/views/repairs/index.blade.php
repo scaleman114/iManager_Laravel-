@@ -101,8 +101,10 @@
                 <!--<td><a href="{{action('RepairController@emailPDF', $repair->id)}}" class="btn btn-info btn-sm">EMail</a>
                 </td>-->
                 <td>
+                    <!-- Get data to populate the modal and display it using script -->
                     <button type="button" class="btn btn-primary btn-sm" id="email_btn" data-toggle="modal"
-                        data-target="#EmailModal" data-repairid="{{ $repair->id }}">
+                        data-target="#EmailModal" data-repairid="{{ $repair->id }}"
+                        data-email="{{ zcontactemailfromname($repair->repair_customer) }}">
 
                         Email PDF
                     </button>
@@ -165,7 +167,10 @@
     $(function() {
         $('#EmailModal').on("show.bs.modal", function(e) {
             var repairId = $(e.relatedTarget).data('repairid');
+            var email = $(e.relatedTarget).data('email');
 
+            //populate the email textbox
+            $(e.currentTarget).find('input[name="email"]').val(email);
             //populate the textbox which is hidden
             $(e.currentTarget).find('input[name="repair_id"]').val(repairId);
 

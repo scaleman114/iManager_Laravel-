@@ -6,6 +6,12 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
 
+/**
+ * Return a contact from zoho contacts.
+ *
+ * @param  \App\ZohoContact  $id
+ * @return \App\ZohoContact  $contact
+ */
 function zgetcontact($id)
 {
     if (session_status() == PHP_SESSION_NONE) {
@@ -72,4 +78,33 @@ function zgetcontact($id)
         //echo Psr7\str($e->getRequest());
         //echo Psr7\str($e->getResponse());
     }
+
+}
+/**
+ * Return a contact from zoho contacts using name only.
+ *
+ * @param  \App\ZohoContact  $name
+ * @return \App\ZohoContact  $contact
+ */
+function zcontactfromname($name)
+{
+    //Get the contact from the local database
+    $zcontact = ZohoContact::where('customer_name', '=', ($name))->first();
+    //Now fetch the contact from zoho using the Id
+    $contact = zgetcontact($zcontact->contact_id);
+    return $contact;
+}
+/**
+ * Return a contact email from zoho contacts using name only.
+ *
+ * @param  \App\ZohoContact  $name
+ * @return \App\ZohoContact  $email
+ */
+function zcontactemailfromname($name)
+{
+    //Get the contact from the local database
+    $zcontact = ZohoContact::where('customer_name', '=', ($name))->first();
+    //Now fetch the contact from zoho using the Id
+    $contact = zgetcontact($zcontact->contact_id);
+    return $contact->customer_email;
 }

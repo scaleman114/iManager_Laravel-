@@ -7,7 +7,7 @@
         <thead class="thead-lightw">
             <tr>
 
-                <th>Customer</th>
+                <th>{{ \App\Enums\RepairType::getDescription($repair->repair_type) }} Customer</th>
                 <th colspan="2">Details</th>
 
 
@@ -23,7 +23,7 @@
 
             <td style="text-align:right;font-weight:bold;">
 
-                Repair No:<br>
+                Sheet No:<br>
                 Date:<br>
                 Min. Charge:<br>
                 Quoted:<br>

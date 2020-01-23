@@ -27,6 +27,7 @@ class RepairController extends Controller
         $searchTerm = $request->input('searchTerm');
 
         $repairs = Repair::search($searchTerm)->get();
+
         return view('repairs.index', compact('repairs'));
     }
 
@@ -55,6 +56,7 @@ class RepairController extends Controller
         ]);
 
         $zcontact = ZohoContact::where('customer_name', '=', $request->get('repair_customer'))->first();
+
         //dd($zcontact);
         $repair = new repair([
             'repair_customer' => $request->get('repair_customer'),
@@ -64,9 +66,11 @@ class RepairController extends Controller
             'quoted' => $request->get('quoted'),
             'hours' => $request->input('hours'),
             'notes' => $request->get('notes'),
+            'email' => $zcontact->customer_email,
 
         ]);
         //dd($repair);
+
         $repair->save();
         //now return to edit the repair
         return redirect('/repairs/' . $repair->id . '/edit')->with('success', 'Repair has been added');

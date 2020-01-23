@@ -98,17 +98,19 @@
                 </td>
                 <td><a href="{{action('RepairController@downloadPDF', $repair->id)}}"
                         class="btn btn-info btn-sm">PDF</a></td>
-                <!--<td><a href="{{action('RepairController@emailPDF', $repair->id)}}" class="btn btn-info btn-sm">EMail</a>
-                </td>-->
-                <td>
-                    <!-- Get data to populate the modal and display it using script -->
+
+                {{-- Get data to populate the modal and display it using script BTW this is how you comment in a blade --}}
+                   <td>
                     <button type="button" class="btn btn-primary btn-sm" id="email_btn" data-toggle="modal"
                         data-target="#EmailModal" data-repairid="{{ $repair->id }}"
-                        data-email="{{ zcontactemailfromname($repair->repair_customer) }}">
+              data-email="{{ $repair->email }}" >
 
-                        Email PDF
-                    </button>
-                </td>
+                Email PDF
+                </button>
+                </td> 
+
+               
+
             </tr>
             @endforeach
         </tbody>
@@ -156,18 +158,18 @@
                     </form>
                 </div>
 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>{{-- /.modal-content --}}
+        </div>{{-- /.modal-dialog --}}
+    </div>{{-- /.modal --}}
 
 
 
-    <!-- function to show the email modal -->
+    {{-- function to show the email modal --}}
     <script type="text/javascript">
     $(function() {
         $('#EmailModal').on("show.bs.modal", function(e) {
             var repairId = $(e.relatedTarget).data('repairid');
-            var email = $(e.relatedTarget).data('email');
+            var email = $(e.relatedTarget).data('email'); 
 
             //populate the email textbox
             $(e.currentTarget).find('input[name="email"]').val(email);

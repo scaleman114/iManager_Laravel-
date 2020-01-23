@@ -15,6 +15,7 @@ class Repair extends Model
         'notes',
         'quoted',
         'hours',
+        'email',
 
     ];
 

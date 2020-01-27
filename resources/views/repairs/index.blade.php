@@ -115,6 +115,11 @@
             @endforeach
         </tbody>
     </table>
+</div>
+<div>
+    {{-- Pagination links --}}
+    {{ $repairs->links() }}
+</div>    
 
 
 

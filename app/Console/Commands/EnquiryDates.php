@@ -51,8 +51,12 @@ class EnquiryDates extends Command
         //if any in the list send an email to each user with the customer & date
         if ($enquiries->count() > 0) {
             foreach ($enquiries as $el) {
+
                 $diarylist .= $el->enq_customer . ':' . $el->enq_diarydate . "\n";
             }
+
+            $url = url('/enquiries');
+            $diarylist .= $url;
 
             foreach ($user as $a) {
                 \Mail::raw($diarylist, function ($message) use ($a) {

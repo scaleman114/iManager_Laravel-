@@ -27,8 +27,8 @@ class RepairController extends Controller
         $searchTerm = $request->input('searchTerm');
 
         //Collection needs to be collected this way to add pagination
-        $repairs = \DB::table('repairs')->paginate(10);
-        //$repairs = Repair::search($searchTerm)->get();
+        //$repairs = \DB::table('repairs')->paginate(10);
+        $repairs = Repair::search($searchTerm);
 
         return view('repairs.index', compact('repairs'));
     }

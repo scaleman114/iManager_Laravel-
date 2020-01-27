@@ -119,6 +119,7 @@
 <div>
     {{-- Pagination links --}}
     {{ $repairs->links() }}
+    
 </div>    
 
 

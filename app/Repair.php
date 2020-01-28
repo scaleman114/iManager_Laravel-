@@ -25,10 +25,10 @@ class Repair extends Model
             $q = $query->where('id', '=', $searchTerm)
                 ->orWhere('repair_customer', 'like', '%' . $searchTerm . '%')
                 ->orderBy('date', 'desc')
-                ->paginate(5);
+                ->paginate(12);
         } else {
             $q = $query->orderBy('date', 'desc')
-                ->paginate(5);
+                ->paginate(12);
             //dd($q);
         }
         return $q;

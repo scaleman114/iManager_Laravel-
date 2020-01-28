@@ -46,6 +46,7 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'contract_customer' => 'required',
 
@@ -147,8 +148,13 @@ class ContractController extends Controller
     public function downloadPDF($id)
     {
         $contract = Contract::find($id);
-        $pdf = PDF::loadView('contracts.pdf', compact('contract'));
-        return $pdf->download('contract.pdf');
+        $contact = zcontactfromname($contract->contract_customer);
+        $address = $contact->customer_name . "\r\n" . $contact->address . "\r\n" . $contact->street2 . " " .
+        $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
+        //Get the contract items
+        $contractitems = ContractItem::contract($id)->get();
+        $pdf = PDF::loadView('contracts.pdf', compact('contract', 'address', 'contractitems'));
+        return $pdf->download('contract_' . $id . 'pdf');
 
     }
 }

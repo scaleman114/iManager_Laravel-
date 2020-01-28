@@ -27,7 +27,8 @@ class Repair extends Model
                 ->orderBy('date', 'desc')
                 ->paginate(5);
         } else {
-            $q = $query->paginate(12);
+            $q = $query->orderBy('date', 'desc')
+                ->paginate(5);
             //dd($q);
         }
         return $q;

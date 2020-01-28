@@ -39,6 +39,21 @@
                 <label for="capacity">Capacity :</label>
                 <input type="text" class="form-control" name="capacity" />
             </div>
+            <div class="form-group">
+                <label for="type">Cover Type :</label>
+                <select class="form-control" name="contract_type" />
+                <option value=0>{{ \App\Enums\ContractVisitType::getDescription(0) }}</option>
+                <option value=1>{{ \App\Enums\ContractVisitType::getDescription(1) }}</option>
+                <option value=2>{{ \App\Enums\ContractVisitType::getDescription(2) }}</option>
+                <option value=3>{{ \App\Enums\ContractVisitType::getDescription(3) }}</option>
+                <option value=4>{{ \App\Enums\ContractVisitType::getDescription(4) }}</option>
+                <option value=5>{{ \App\Enums\ContractVisitType::getDescription(5) }}</option>
+                <option value=6>{{ \App\Enums\ContractVisitType::getDescription(6) }}</option>
+                <option value=7>{{ \App\Enums\ContractVisitType::getDescription(7) }}</option>
+                <option value=8>{{ \App\Enums\ContractVisitType::getDescription(8) }}</option>
+                </select>
+            </div>
+            
 
 
 

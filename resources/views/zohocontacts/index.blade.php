@@ -74,6 +74,7 @@
                 <td>Name</td>
                 <td>Email</td>
                 <td>Phone</td>
+                <td>Type</td>
 
                 <td colspan="2">Action</td>
             </tr>
@@ -85,6 +86,8 @@
                 <td>{{$contact->customer_name}}</td>
                 <td>{{$contact->customer_email}}</td>
                 <td>{{$contact->customer_phone}}</td>
+                {{-- Make first letter of type uppercase --}}
+                <td>{{ucfirst($contact->contact_type)}}</td>
 
 
 
@@ -94,21 +97,27 @@
                     <form action="{{ route('zohocontacts.destroy',$contact->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')"
+                        <button class="btn btn-danger" id="delete" onclick="return confirm('Are you sure?')"
                             type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
             @endforeach
+            <tr>
+                <td>Count: {{count($contacts)}} </td>
+                
+
+                
+            </tr>
         </tbody>
     </table>
 
-
 </div>
+
 
 <script>
 $(".delete").on("submit", function() {
-    return confirm("Are you sure?");
+    return confirm("Are you ssure?");
 });
 </script>
 

@@ -22,6 +22,7 @@ class ZohoController extends Controller
 
         $searchTerm = $request->input('searchTerm');
         $contacts = ZohoContact::search($searchTerm)->get();
+        //dd($contacts);
         return view('zohocontacts.index', compact('contacts'));
         /*$contacts = ZohoContact::all();
     //return $groups;
@@ -63,6 +64,7 @@ class ZohoController extends Controller
                 $zcontact->customer_phone = $value['phone'];
                 $zcontact->first_name = $value['first_name'];
                 $zcontact->last_name = $value['last_name'];
+                $zcontact->contact_type = $value['contact_type'];
 
                 $zcontact->save();
                 $count++;

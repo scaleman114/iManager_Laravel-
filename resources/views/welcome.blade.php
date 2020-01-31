@@ -91,8 +91,11 @@
                 <a href="{{ url('/enquiries') }}">Enquiries</a>
                 <a href="{{ url('/repairs') }}">Repairs</a>
                 <a href="{{ url('/parts') }}">Parts</a>
-                <a href="{{ url('/contacts') }}">Contacts</a>
+                <a href="{{ url('/contacts') }}">All Contacts</a>
+                <a href="{{ url('/contacts/customers') }}">Customers</a>
+                <a href="{{ url('/contacts/vendors') }}">Vendors</a>
                 <a href="{{ url('/contracts') }}">Contracts</a>
+                
                 <a href="https://laravel-news.com">News</a>
                 <a href="https://nova.laravel.com">Nova</a>
                 <a href="https://sampo.co.uk/blog/using-enums-in-laravel">Enums in Laravel</a>

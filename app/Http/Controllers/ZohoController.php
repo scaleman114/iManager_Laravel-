@@ -29,6 +29,30 @@ class ZohoController extends Controller
     return view('zohocontacts.index', compact('contacts'));*/
     }
 
+    public function customerindex(Request $request)
+    {
+
+        $searchTerm = $request->input('searchTerm');
+        $contacts = ZohoContact::Customersearch($searchTerm)->get();
+        //dd($contacts);
+        return view('zohocontacts.index', compact('contacts'));
+        /*$contacts = ZohoContact::all();
+    //return $groups;
+    return view('zohocontacts.index', compact('contacts'));*/
+    }
+
+    public function vendorindex(Request $request)
+    {
+
+        $searchTerm = $request->input('searchTerm');
+        $contacts = ZohoContact::Vendorsearch($searchTerm)->get();
+        //dd($contacts);
+        return view('zohocontacts.index', compact('contacts'));
+        /*$contacts = ZohoContact::all();
+    //return $groups;
+    return view('zohocontacts.index', compact('contacts'));*/
+    }
+
     public function fetchContacts($i, $access_token)
     {
         $count = 0;
@@ -265,7 +289,6 @@ class ZohoController extends Controller
         $contact->save();
         //send to zoho
         self::zupdate($contact);
-
         return redirect('/contacts')->with('success', 'Zoho Contact has been updated');
     }
     //update the contact in zoho books

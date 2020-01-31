@@ -15,4 +15,37 @@ class ZohoContact extends Model
             ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
 
     }
+    public static function scopeCustomerSearch($query, $searchTerm)
+    {
+        
+
+            if ($searchTerm != '') {
+                $q = $query->where('contact_type','=','customer')
+                ->where('customer_name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
+            } else {
+                $q = $query->where('contact_type','=','customer');
+                //dd($q);
+            }
+            return $q;
+    
+
+    }
+
+    public static function scopeVendorSearch($query, $searchTerm)
+    {
+        
+
+            if ($searchTerm != '') {
+                $q = $query->where('contact_type','=','vendor')
+                ->where('customer_name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
+            } else {
+                $q = $query->where('contact_type','=','vendor');
+                //dd($q);
+            }
+            return $q;
+    
+
+    }
 }

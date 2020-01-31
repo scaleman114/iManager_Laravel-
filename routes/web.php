@@ -62,6 +62,8 @@ Route::get('/zohoparts', 'PartController@parts')->name('zohoparts');
 Route::get('/zohogroups', 'GroupController@groups')->name('zohogroups');
 //fetches from db
 Route::get('/contacts', 'ZohoController@index')->name('zohocontacts.index');
+Route::get('/contacts/customers', 'ZohoController@customerindex')->name('zohocontacts.customerindex');
+Route::get('/contacts/vendors', 'ZohoController@vendorindex')->name('zohocontacts.vendorindex');
 Route::get('/parts', 'PartController@index')->name('zohoparts.index');
 Route::get('/groups', 'GroupController@index')->name('zohogroups.index');
 

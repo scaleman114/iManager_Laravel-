@@ -22,7 +22,7 @@ class ZohoContact extends Model
             if ($searchTerm != '') {
                 $q = $query->where('contact_type','=','customer')
                 ->where('customer_name', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
+                ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
             } else {
                 $q = $query->where('contact_type','=','customer');
                 //dd($q);
@@ -39,7 +39,7 @@ class ZohoContact extends Model
             if ($searchTerm != '') {
                 $q = $query->where('contact_type','=','vendor')
                 ->where('customer_name', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
+                ->orWhere('first_name', 'like', '%' . $searchTerm . '%');
             } else {
                 $q = $query->where('contact_type','=','vendor');
                 //dd($q);

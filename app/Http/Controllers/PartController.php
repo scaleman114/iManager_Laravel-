@@ -52,6 +52,7 @@ class PartController extends Controller
             ]);
 
             $result = json_decode($res->getBody()->getContents(), true);
+            $status = $result['code'];
             $hasmore = $result['page_context']['has_more_page'];
             //dd($hasmore);
             //dd($result);
@@ -87,11 +88,11 @@ class PartController extends Controller
             echo Psr7\str($e->getResponse());
         }
         //return count and hasmore bool - has to be an array as 2 things returned
-        return array($count, $hasmore);
+        return array($count, $hasmore, $status);
 
     }
 
-    //Gets all parts from zoho
+    //Gets all parts from zoho route '/zohoparts'
     public function parts()
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -129,7 +130,14 @@ class PartController extends Controller
 
         $parts = Part::all();
         //dd($parts);
-        header('Location: ' . '/parts');
+        //header('Location: ' . '/parts');
+        //dd($fetched);
+        //if no error
+        if ($fetched[2] == 0) {
+            return redirect('/parts')->with('success', 'Zoho parts updated');
+        } else {
+            return redirect('/parts')->with('error', 'Error:' . $fetched[2]);
+        }
         //return view('zohoparts.index', compact('parts', 'totalloaded'));
 
         /*foreach ($result['parts'] as $value) {

@@ -108,12 +108,11 @@ class ZohoController extends Controller
         return array($count, $hasmore, $status);
 
     }
-    //Gets all contacts from zoho
+    //Gets all contacts from zoho  route is '/zohocontacts'
     public function contacts()
     {
         if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
+            session_start();}
         //Create new instance of TokenCache
         $tokenCache = new \App\TokenStore\TokenCache;
 
@@ -146,6 +145,7 @@ class ZohoController extends Controller
 
         $contacts = ZohoContact::all();
         //dd($contacts);
+        //dd($fetched);
         //if no error
         if ($fetched[2] == 0) {
             return redirect('/contacts')->with('success', 'Zoho contacts updated');
@@ -178,7 +178,8 @@ class ZohoController extends Controller
 
         $contact = ZohoContact::find($id);
         //dd($contact);
-        return view('zohocontacts.edit', compact('contact'));
+        return view('zohocontacts.edit', compact('contact')
+        );
     }
 
     /**

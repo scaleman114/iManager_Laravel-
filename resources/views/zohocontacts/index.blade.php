@@ -2,47 +2,47 @@
 
 @section('content')
 <style>
-.uper {
-    margin-top: 40px;
-}
+    .uper {
+        margin-top: 40px;
+    }
 
-.top-right {
-    position: absolute;
-    right: 10px;
-    top: 18px;
-}
+    .top-right {
+        position: absolute;
+        right: 10px;
+        top: 18px;
+    }
 
-.cust-top-right {
-    position: absolute;
-    right: 10px;
-    top: 60px;
-}
+    .cust-top-right {
+        position: absolute;
+        right: 10px;
+        top: 60px;
+    }
 
-.vend-top-right {
-    position: absolute;
-    right: 10px;
-    top: 90px;
-}
+    .vend-top-right {
+        position: absolute;
+        right: 10px;
+        top: 90px;
+    }
 
-.links>a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-}
+    .links>a {
+        color: #636b6f;
+        padding: 0 25px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .1rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
 
-.filterlinks>a {
-    color: #636b6f;
-    padding: 100px 0px 100px 0px;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-}
+    .filterlinks>a {
+        color: #636b6f;
+        padding: 100px 0px 100px 0px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: .1rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
 </style>
 
 
@@ -75,24 +75,22 @@
     </div>
 
     <div class="col-sm-2 filterlinks">
-            <a href="{{ url('/contacts/customers') }}">Customers Only</a>
-        </div>
+        <a href="{{ url('/contacts/customers') }}">Customers Only</a>
+    </div>
 
     <div class="col-md-2 filterlinks">
-            <a href="{{ url('/contacts/vendors') }}">Vendors Only</a>
-        </div>
+        <a href="{{ url('/contacts/vendors') }}">Vendors Only</a>
+    </div>
 
-   
-    
 
-    
-</div>
-
-<div class="row">
 
 
 
 </div>
+
+
+
+
 
 
 <div class="uper">
@@ -148,9 +146,9 @@
             @endforeach
             <tr>
                 <td>Count: {{count($contacts)}} </td>
-                
 
-                
+
+
             </tr>
         </tbody>
     </table>

@@ -59,8 +59,9 @@ class TokenCache
                 // Store the new values
                 $this->storeTokens($newToken->getToken(), $newToken->getRefreshToken(),
                     $newToken->getExpires());
-
+                //return the new token
                 return $newToken->getToken();
+
             } catch (League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
                 return '';
             }

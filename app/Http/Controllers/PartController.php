@@ -60,6 +60,7 @@ class PartController extends Controller
                 //dd($value);
                 $zpart = new Part;
                 $zpart->part_id = $value['item_id'];
+                $zpart->sku = $value['sku'];
                 $zpart->description = $value['name'];
                 $zpart->price = $value['rate'];
                 $zpart->cost = $value['purchase_rate'];
@@ -177,6 +178,7 @@ class PartController extends Controller
 
         ]);
         $part = new Part([
+            'sku' => $request->get('sku'),
             'description' => $request->get('description'),
             'cost' => $request->get('cost'),
             'price' => $request->get('price'),
@@ -232,7 +234,7 @@ class PartController extends Controller
         ]);
 
         $part = part::find($id);
-
+        $part->sku = $request->get('sku');
         $part->description = $request->get('description');
         $part->cost = $request->get('cost');
         $part->price = $request->get('price');
@@ -284,6 +286,7 @@ class PartController extends Controller
             'rate' => $part->price,
             'purchase_rate' => $part->cost,
             'description' => $part->notes,
+            'sku' => $part->sku,
 
         ]);
 

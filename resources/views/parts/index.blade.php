@@ -63,6 +63,7 @@
         <thead>
             <tr>
                 <td>ID</td>
+                <td>SKU</td>
                 <td>Description</td>
                 <td>Cost</td>
                 <td>Price</td>
@@ -78,6 +79,7 @@
             @foreach($parts as $part)
             <tr>
                 <td>{{$part->part_id}}</td>
+                <td>{{$part->sku}}</td>
                 <td>{{$part->description}}</td>
                 <td>{{$part->cost}}</td>
                 <td>{{$part->price}}</td>

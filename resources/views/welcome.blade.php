@@ -92,8 +92,6 @@
                 <a href="{{ url('/repairs') }}">Repairs</a>
                 <a href="{{ url('/parts') }}">Parts</a>
                 <a href="{{ url('/contacts') }}">All Contacts</a>
-                <a href="{{ url('/contacts/customers') }}">Customers</a>
-                <a href="{{ url('/contacts/vendors') }}">Vendors</a>
                 <a href="{{ url('/contracts') }}">Contracts</a>
                 
                 <a href="https://laravel-news.com">News</a>

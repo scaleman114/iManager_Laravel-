@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Part extends Model
 {
     protected $fillable = [
+        'sku',
         'description',
         'cost',
         'price',
@@ -21,7 +22,8 @@ class Part extends Model
     public static function scopeSearch($query, $searchTerm)
     {
         return $query->where('id', '=', $searchTerm)
-            ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->orWhere('sku', 'like', '%' . $searchTerm . '%');
 
     }
 

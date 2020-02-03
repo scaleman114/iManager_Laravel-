@@ -24,6 +24,10 @@
             @method('PATCH')
             @csrf
             <div class="form-group">
+                <label for="sku">SKU:</label>
+                <input type="text" class="form-control" name="sku" size="50" value="{{ $part->sku }}" />
+            </div>
+            <div class="form-group">
                 <label for="description">Description:</label>
                 <input type="text" class="form-control" name="description" size="50" value="{{ $part->description }}" />
             </div>

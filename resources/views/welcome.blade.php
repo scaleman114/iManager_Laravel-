@@ -93,6 +93,7 @@
                 <a href="{{ url('/parts') }}">Parts</a>
                 <a href="{{ url('/contacts') }}">All Contacts</a>
                 <a href="{{ url('/contracts') }}">Contracts</a>
+                <a href="{{ url('/groups') }}">Groups</a>
                 
                 <a href="https://laravel-news.com">News</a>
                 <a href="https://nova.laravel.com">Nova</a>

@@ -29,7 +29,7 @@
 
 <body>
     <div>
-        <h1 class="text-center">Weigh-Till Groups</h1>
+        <h1 class="text-center">Groups</h1>
 
     </div>
 

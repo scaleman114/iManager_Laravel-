@@ -45,13 +45,15 @@ class PartController extends Controller
             'Content-type' => "application/x-www-form-urlencoded;charset=UTF-8",
 
         ]);
+        //dd($headers);
         try {
             $client = new Client();
+            //$res = $client->get("https://books.zoho.com/api/v3/items", ['query' => $query, "headers" => $headers]);
 
-            $res = $client->get("https://books.zoho.com/api/v3/items", ['query' => $query, "headers" => $headers,
-            ]);
-
+            $res = $client->get(env('ZOHO_INV_API') . '/items', ['query' => $query, "headers" => $headers]);
+            //dd($res);
             $result = json_decode($res->getBody()->getContents(), true);
+            //dd($result);
             $status = $result['code'];
             $hasmore = $result['page_context']['has_more_page'];
             //dd($hasmore);
@@ -72,6 +74,10 @@ class PartController extends Controller
                     $zpart->stock_item = 1;
                 } else {
                     $zpart->stock_item = 0;
+                }
+                if (array_key_exists('group_id', $value)) {
+
+                    $zpart->group_id = $value['group_id'];
                 }
 
                 $zpart->save();
@@ -248,7 +254,7 @@ class PartController extends Controller
         //$part->stock_item = $request->get('stock_item');
         //
         $part->supplier_id = $request->get('supplier_id');
-        //$part->group_id = $request->get('group_id');
+        $part->group_id = $request->get('group_id');
         // dd($request);
         $part->save();
         self::zupdate($part);
@@ -287,6 +293,7 @@ class PartController extends Controller
             'purchase_rate' => $part->cost,
             'description' => $part->notes,
             'sku' => $part->sku,
+            'group_id' => $part->group_id,
 
         ]);
 
@@ -300,12 +307,12 @@ class PartController extends Controller
             'JSONString' => $data,
         ]);
 
-        //dd($body2);
+        //dd($body);
         //dd($zcontact->primary_contactId);
         try {
             $client = new Client();
             //Send to items
-            $res = $client->put(env('ZOHO_BOOKS_API') . '/items/' . $part->part_id,
+            $res = $client->put(env('ZOHO_INV_API') . '/items/' . $part->part_id,
                 ['query' => $query, "headers" => $headers, 'form_params' => $body]);
 
             //dd($res);

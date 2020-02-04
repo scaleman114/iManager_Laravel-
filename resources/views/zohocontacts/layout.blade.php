@@ -29,7 +29,7 @@
 
 <body>
     <div>
-        <h1 class="text-center">Weigh-Till Contacts</h1>
+        <h1 class="text-center">Contacts</h1>
 
     </div>
 

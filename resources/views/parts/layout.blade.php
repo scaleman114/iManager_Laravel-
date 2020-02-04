@@ -29,7 +29,7 @@
 
 <body>
     <div>
-        <h3 class="text-center">Weigh-Till Parts</h3>
+        <h3 class="text-center">Parts</h3>
 
     </div>
 

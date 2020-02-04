@@ -27,7 +27,7 @@
 </head>
 <body>
 <div>
-  <h1 class="text-center">Weigh-Till Enquiries</h1>
+  <h1 class="text-center">Enquiries</h1>
 
 </div>
 

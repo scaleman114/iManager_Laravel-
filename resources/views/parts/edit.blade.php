@@ -32,16 +32,22 @@
                 <input type="text" class="form-control" name="description" size="50" value="{{ $part->description }}" />
             </div>
 
-            <div class="form-group">
-                <label for="group_id">Name :</label>
-                <select class="form-control" name="group_id" value="{{  $part->group_id  }}">
-                    @foreach($groups as $group)
-                    <option value="{{$group->id}}" {{$part->group_id==$group->id ? 'selected' : ''}}>{{$group->name}}
+         {{--   <div class="form-group">
+                <label for="group_id">Group :</label>
+                <select class="form-control" name="group_id" >
+                   @foreach($groups as $group)
+                    <option value="{{$group->group_id}}" {{ ($part->group_id==$group->group_id) ? 'selected' :  ''}} >{{$group->name}}
                     </option>
-                    @endforeach
-
+                    @endforeach 
                 </select>
+            </div>--}}
+
+            {{-- Readonly. Used to be a select box as above but zoho inventory not allowing group change from here --}}
+            <div class="form-group">
+                <label for="group_id">Group :</label>
+                <input type="text" class="form-control" readonly="readonly"  name="group_id" size="20" value="{{ \App\Group::getGroupName($part->group_id) }}" />
             </div>
+
 
             <div class="form-group">
                 <label for="cost">Cost:</label>
@@ -59,17 +65,18 @@
                 <input type="text" class="form-control" name="supplier_no" size="30" value="{{ $part->supplier_no }}" />
             </div>
 
-            <div class="form-group">
+            {{-- Readonly with onclick="return false" --}}
+            <div class="form-group" >
                 <label for="stock_item">Stock Item :</label>
                 <input type="hidden" class="form-control" name="stock_item[1]" value="0" />
-                <input type="checkbox" class="form-control" name="stock_item[0]" value="{{ $part->stock_item }}"
+                <input type="checkbox" onclick="return false" class="form-control" name="stock_item[0]" value="{{ $part->stock_item }}"
                     @if($part->stock_item==1) checked @endif />
 
             </div>
-
+            {{-- Readonly with readonly="readonly" --}}
             <div class="form-group">
                 <label for="count">Count:</label>
-                <input type="text" class="form-control" name="count" size="20" value="{{ $part->count }}" />
+                <input type="text" class="form-control" readonly="readonly"  name="count" size="20" value="{{ $part->count }}" />
             </div>
 
             <div class="form-group">

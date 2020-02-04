@@ -32,7 +32,7 @@
 
 <body>
     <div>
-        <h1 class="text-center">Weigh-Till Repair Items</h1>
+        <h1 class="text-center">Repair Items</h1>
 
     </div>
 

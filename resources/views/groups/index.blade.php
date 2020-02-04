@@ -2,10 +2,35 @@
 
 @section('content')
 <style>
-.uper {
-    margin-top: 40px;
-}
-</style>
+    .uper {
+        margin-top: 40px;
+    }
+    
+    .top-right {
+        position: absolute;
+        right: 10px;
+        top: 18px;
+    }
+    
+    .links>a {
+        color: #636b6f;
+        padding: 0 25px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .1rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    </style>
+    
+    
+    <div class="top-right links">
+    
+        <a href="{{ url('/') }}">Home</a>
+    
+    </div>
+    
+
 
 <div>
     <div class="col-md-12">
@@ -27,7 +52,7 @@
                 <td>Name</td>
 
 
-                <td colspan="2">Action</td>
+                
             </tr>
         </thead>
         <tbody>
@@ -38,15 +63,7 @@
 
 
 
-                <td><a href="{{ route('groups.edit',$group->id)}}" class="btn btn-primary">Edit</a></td>
-                <td>
-                    <form action="{{ route('groups.destroy', $group->id)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')"
-                            type="submit">Delete</button>
-                    </form>
-                </td>
+                
             </tr>
             @endforeach
         </tbody>

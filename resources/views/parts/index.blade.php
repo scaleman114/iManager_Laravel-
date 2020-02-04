@@ -101,6 +101,9 @@
                 </td>
             </tr>
             @endforeach
+            <tr>
+                <td>Count: {{count($parts)}} </td>
+            </tr>
         </tbody>
     </table>
 

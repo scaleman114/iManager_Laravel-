@@ -61,6 +61,7 @@
     </div>
     @endif
 
+ <div class=class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -99,7 +100,7 @@
             @endforeach
         </tbody>
     </table>
-
+ </div>
     <div class="row">
 
 
@@ -138,4 +139,5 @@
 
 
 
+</div>
     @endsection

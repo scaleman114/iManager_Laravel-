@@ -120,8 +120,16 @@ class RepairController extends Controller
             'repair_customer' => 'required',
 
         ]);
-
+        $input = $request->all();
         $repair = Repair::find($id);
+
+        /* Much easier way of assigning request values than below, needs the correct fields set to fillable though */
+        $repair->fill($input)->save();
+        //dd($repair);
+
+        //dd($input);
+
+        /*   $repair = Repair::find($id);
 
         $repair->id = $request->get('repair_id');
         $repair->repair_customer = $request->get('repair_customer');
@@ -133,7 +141,7 @@ class RepairController extends Controller
         $repair->notes = $request->get('repair_notes');
         $repair->repair_type = $request->get('repair_type');
 
-        $repair->save();
+        $repair->save(); */
 
         return redirect('/repairs')->with('success', 'Repair has been updated');
     }

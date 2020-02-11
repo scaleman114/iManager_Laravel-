@@ -65,7 +65,7 @@
                 <input type="text" class="form-control" name="supplier_no" size="30" value="{{ $part->supplier_no }}" />
             </div>
 
-            {{-- Readonly with onclick="return false" --}}
+            {{-- Readonly made by onclick="return false" --}}
             <div class="form-group" >
                 <label for="stock_item">Stock Item :</label>
                 <input type="hidden" class="form-control" name="stock_item[1]" value="0" />

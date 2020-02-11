@@ -51,7 +51,7 @@
                 <div class="form-group col-md-6">
                     <label for="date">Repair Date :</label>
                     <div class="input-group datepick">
-                        <input class="form-control" type="text" id="datepicker" name="repair_date"
+                        <input class="form-control" type="text" id="datepicker" name="date"
                             value="{{ $repair->date }}" maxlength="10">
 
                         <div class="input-group-addon">

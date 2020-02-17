@@ -74,34 +74,27 @@ class EnquiryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Enquiry $enquiry
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    //public function store(Request $request)
+    public function store(Enquiry $enquiry)
     {
-        $request->validate([
+        request()->validate([
             'enq_zcontact' => 'required',
             'enq_description' => 'required',
         ]);
-        //$current = Carbon::now();
-        //dd($request->get('enq_zcontact'));
-        $zcontact = ZohoContact::where('customer_name', '=', $request->get('enq_zcontact'))->first();
-        //dd($zcontact);
-        $enquiry = new Enquiry([
-            'enq_customer' => $request->get('enq_zcontact'),
-            //'enq_customer' => $request->get('enq_customer'),
-            'enq_description' => $request->get('enq_description'),
-            'enq_completed' => false,
-            'enq_diarydate' => $request->input('enq_diarydate'),
-            'user_id' => Auth::id(), //the logged on user
-
+        $zcontact = ZohoContact::where('customer_name', '=', request('enq_zcontact'))->first();
+        $enquiry->create([
+            'enq_customer' => request('enq_zcontact'),
+            'enq_description' => request('enq_description'),
+            'enq_diarydate' => request('enq_diarydate'),
             'enq_email' => $zcontact->customer_email,
             'enq_phone' => $zcontact->customer_phone,
+            'user_id' => Auth::id(), //the logged on user
 
         ]);
 
-        //dd($enquiry);
-        $enquiry->save();
         //Send a notification to all users
         $users = User::select("email")->get();
         //dd($users);
@@ -146,38 +139,33 @@ class EnquiryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Enquiry $enquiry
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Enquiry $enquiry)
     {
-        $request->validate([
+        request()->validate([
             'enq_zcontact' => 'required',
             'enq_description' => 'required',
 
         ]);
 
-        $enquiry = Enquiry::find($id);
-        $enquiry->enq_customer = $request->get('enq_zcontact');
-        $enquiry->enq_description = $request->get('enq_description');
-        //$enquiry->enq_completed = $request->get('enq_completed');
+        $zcontact = ZohoContact::where('customer_name', '=', request('enq_zcontact'))->first();
 
-        //get the value from checkbox - just need to set it to show checkbox checked
-        if (!$request->input('enq_completed')) {
+        if (!request('enq_completed')) {
             $enquiry->enq_completed = false;
         } else {
             $enquiry->enq_completed = true;
         }
+        $enquiry->update([
+            'enq_customer' => request('enq_zcontact'),
+            'enq_description' => request('enq_description'),
+            'enq_diarydate' => request('enq_diarydate'),
+            'enq_email' => $zcontact->customer_email,
+            'enq_phone' => $zcontact->customer_phone,
+            'user_id' => Auth::id(), //the logged on user
 
-        //dd($enquiry->enq_completed)
-        $enquiry->enq_email = $request->input('enq_email');
-        $enquiry->enq_phone = $request->input('enq_phone');
-        $enquiry->enq_diarydate = $request->input('enq_diarydate');
-        $enquiry->user_id = Auth::id(); //the logged on user
-
-        //dd($request);
-        $enquiry->save();
+        ]);
 
         return redirect('/enquiries')->with('success', 'Enquiry has been updated');
     }

@@ -60,7 +60,7 @@
         {{ session()->get('success') }}
     </div>
     @endif
-    @if ($message = Session::get('error'))
+    @if (session()->get('error'))
     <div class="alert alert-danger">
         {{ session()->get('error') }}
     </div>

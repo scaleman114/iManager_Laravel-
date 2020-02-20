@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RepairPDF;
 use App\Repair;
 use App\RepairItem;
 use App\ZohoContact;
@@ -192,15 +193,14 @@ class RepairController extends Controller
         $contact = zcontactfromname($repair->repair_customer);
         $address = $contact->customer_name . "\r\n" . $contact->address . "\r\n" . $contact->street2 . " " .
         $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
-        //dd($address);
+
         //Get the repair items
         $repairitems = RepairItem::repair($repair->id)->get();
-        //dd($repairitems);
+
         //Create the pdf from the view
         $pdf = PDF::loadView('repairs.pdf', compact('repair', 'repairitems', 'address'));
-        //Download the pdf
-        //return $pdf->download('repair.pdf');
 
+        //Setup $data array to hold the mail info
         $data["email"] = $formEmail;
         //if no email supplied use the default email in zoho
         if ($data["email"] == null) {
@@ -209,15 +209,14 @@ class RepairController extends Controller
 
         $data["client_name"] = $contact->customer_name;
         $data["subject"] = 'Repair Sheet ' . $repair->id;
-
+        $data['pdf'] = $pdf->output();
+        $data['pdf-name'] = 'Repair_' . $repair->id . '.pdf';
         //dd($data);
 
+        //Build the mail message (/Mail/RepairPDF) as markdown
         try {
-            \Mail::Send('repairs.mail', $data, function ($message) use ($data, $pdf) {
-                $message->to($data["email"], $data["client_name"])
-                    ->subject($data["subject"])
-                    ->attachData($pdf->output(), "repair.pdf");
-            });
+            \Mail::send(new RepairPDF($data));
+
         } catch (JWTException $exception) {
             $this->serverstatuscode = "0";
             $this->serverstatusdes = $exception->getMessage();
@@ -233,6 +232,7 @@ class RepairController extends Controller
             $this->statuscode = "1";
             return redirect('/repairs')->with('success', $this->statusdesc);
         }
+
         return response()->json(compact('this'));
 
     }

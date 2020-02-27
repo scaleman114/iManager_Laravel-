@@ -102,7 +102,7 @@ class RepairController extends Controller
         $repair = repair::find($id);
         $zohocontacts = ZohoContact::all(['customer_name']);
         //dd($repair);
-        $repairitems = repairItem::repair($id)->get();
+        $repairitems = $repair->repairitems;
         //dd($repairitems);
         return view('repairs.edit', compact('repair', 'zohocontacts', 'repairitems'));
 

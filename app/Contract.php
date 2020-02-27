@@ -18,4 +18,9 @@ class Contract extends Model
         'contract_type',
 
     ];
+
+    public function contractitems()
+    {
+        return $this->hasMany('App\ContractItem');
+    }
 }

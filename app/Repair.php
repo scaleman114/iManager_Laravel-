@@ -34,4 +34,9 @@ class Repair extends Model
         return $q;
 
     }
+
+    public function repairitems()
+    {
+        return $this->hasMany('App\RepairItem');
+    }
 }

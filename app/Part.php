@@ -27,4 +27,9 @@ class Part extends Model
 
     }
 
+    public function group()
+    {
+        return $this->hasOne('App\Group');
+    }
+
 }

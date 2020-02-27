@@ -92,7 +92,7 @@ class ContractController extends Controller
         $contract = contract::find($id);
         $zohocontacts = ZohoContact::all(['customer_name']);
         //dd($contract);
-        $contractitems = ContractItem::Contract($id)->get();
+        $contractitems = $contract->contractitems;
         //dd($contractitems);
         return view('contracts.edit', compact('contract', 'zohocontacts', 'contractitems'));
 

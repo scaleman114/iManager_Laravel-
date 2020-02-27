@@ -18,4 +18,11 @@ class RepairItem extends Model
         return $query->where('repair_id', '=', $repairId);
 
     }
+    public function repair()
+    {
+
+        return $this->belongsTo('App\Repair');
+
+    }
+
 }

@@ -24,4 +24,9 @@ class Group extends Model
 
         return $groupname;
     }
+
+    public function group()
+    {
+        return $this->belongsTo('App\Part');
+    }
 }

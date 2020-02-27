@@ -20,4 +20,9 @@ class ContractItem extends Model
         return $query->where('contract_id', '=', $contractId);
 
     }
+
+    public function contract()
+    {
+        return $this->belongsTo('App\Contract');
+    }
 }

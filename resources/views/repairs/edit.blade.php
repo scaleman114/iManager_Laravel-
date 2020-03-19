@@ -103,7 +103,7 @@
 
             <div class="form-group">
                 <label for="notes">Repair Notes :</label>
-                <textarea class="form-control" name="repair_notes"> {{ $repair->notes }} </textarea>
+                <textarea class="form-control" name="notes"> {{ $repair->notes }} </textarea>
             </div>
 
             <div class="form-row">

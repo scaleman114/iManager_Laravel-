@@ -122,6 +122,7 @@ class RepairController extends Controller
 
         ]);
         $input = $request->all();
+        //dd($input);
         $repair = Repair::find($id);
 
         /* Much easier way of assigning request values than below, needs the correct fields set to fillable though */

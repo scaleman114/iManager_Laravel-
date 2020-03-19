@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\RepairPDF;
 use App\Repair;
-use App\RepairItem;
 use App\ZohoContact;
 use Illuminate\Http\Request;
 use PDF;
@@ -175,7 +174,8 @@ class RepairController extends Controller
         $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
         //dd($address);
         //Get the repair items
-        $repairitems = RepairItem::repair($id)->get();
+        //$repairitems = RepairItem::repair($id)->get();
+        $repairitems = $repair->repairitems;
         //dd($repairitems);
         //Create the pdf from the view
         $pdf = PDF::loadView('repairs.pdf', compact('repair', 'repairitems', 'address'));
@@ -196,8 +196,7 @@ class RepairController extends Controller
         $contact->city . ".\r\n" . $contact->state . "\r\n" . $contact->zip;
 
         //Get the repair items
-        $repairitems = RepairItem::repair($repair->id)->get();
-
+        $repairitems = $repair->repairitems;
         //Create the pdf from the view
         $pdf = PDF::loadView('repairs.pdf', compact('repair', 'repairitems', 'address'));
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b65daa8e69af6c7492985bcfc505bb15",
+    "content-hash": "fcb62f96d8a80659ce439eb4b25a1e5a",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -64,16 +64,16 @@
         },
         {
             "name": "bensampo/laravel-enum",
-            "version": "v1.35",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BenSampo/laravel-enum.git",
-                "reference": "439065e8145fc217884d7e1ca1ca8766a1a89968"
+                "reference": "25cd11ab85ca0b9b8bc2eb969c0f1cddd9e175c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/439065e8145fc217884d7e1ca1ca8766a1a89968",
-                "reference": "439065e8145fc217884d7e1ca1ca8766a1a89968",
+                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/25cd11ab85ca0b9b8bc2eb969c0f1cddd9e175c4",
+                "reference": "25cd11ab85ca0b9b8bc2eb969c0f1cddd9e175c4",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
                 "package",
                 "validation"
             ],
-            "time": "2020-03-16T09:17:29+00:00"
+            "time": "2020-04-11T14:18:49+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1097,6 +1097,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1143,6 +1144,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {

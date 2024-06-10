@@ -34,7 +34,7 @@ Route::resource('repairitems', 'RepairItemController');
 Route::get('repair/{repair_id}/repairitems/create', 'RepairItemController@create')->name('repairitems.create');
 
 Auth::routes(['register'=>false]);
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
